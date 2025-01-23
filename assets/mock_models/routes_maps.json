@@ -1,0 +1,288 @@
+{
+    "geocoded_waypoints": [
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJhfWcH1Zh3BIRpCRsJXwqifc",
+            "types": [
+                "street_address"
+            ]
+        },
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJZa3tCNBj3BIRj54JMBVDDEw",
+            "types": [
+                "street_address"
+            ]
+        },
+        {
+            "geocoder_status": "OK",
+            "place_id": "ChIJz3YxcFRh3BIRvOKKpN8T68s",
+            "types": [
+                "street_address"
+            ]
+        }
+    ],
+    "routes": [
+        {
+            "bounds": {
+                "northeast": {
+                    "lat": 40.7248592,
+                    "lng": 8.5708463
+                },
+                "southwest": {
+                    "lat": 40.7167016,
+                    "lng": 8.562968099999999
+                }
+            },
+            "copyrights": "Map data ©2024",
+            "legs": [
+                {
+                    "distance": {
+                        "text": "0.6 km",
+                        "value": 613
+                    },
+                    "duration": {
+                        "text": "3 mins",
+                        "value": 172
+                    },
+                    "end_address": "Piazza d'Italia, 1, 07100 Sassari SS, Italy",
+                    "end_location": {
+                        "lat": 40.7247839,
+                        "lng": 8.5643203
+                    },
+                    "start_address": "Via Giorgio Asproni, 22, 07100 Sassari SS, Italy",
+                    "start_location": {
+                        "lat": 40.7213413,
+                        "lng": 8.5651767
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "75 m",
+                                "value": 75
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 13
+                            },
+                            "end_location": {
+                                "lat": 40.7217622,
+                                "lng": 8.5658729
+                            },
+                            "html_instructions": "Head <b>northeast</b> on <b>Via Giorgio Asproni</b> toward <b>Via Maurizio Zanfarino</b>",
+                            "polyline": {
+                                "points": "kkpwFk{gs@sAiC"
+                            },
+                            "start_location": {
+                                "lat": 40.7213413,
+                                "lng": 8.5651767
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.4 km",
+                                "value": 389
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 89
+                            },
+                            "end_location": {
+                                "lat": 40.7244798,
+                                "lng": 8.562968099999999
+                            },
+                            "html_instructions": "Turn <b>left</b> onto <b>Via Camillo Benso Conte di Cavour</b>/<wbr/><b>Via Cavour</b>",
+                            "maneuver": "turn-left",
+                            "polyline": {
+                                "points": "_npwFu_hs@wC`DeCnCe@h@w@x@c@d@_CfC"
+                            },
+                            "start_location": {
+                                "lat": 40.7217622,
+                                "lng": 8.5658729
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "69 m",
+                                "value": 69
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 27
+                            },
+                            "end_location": {
+                                "lat": 40.7248592,
+                                "lng": 8.5636228
+                            },
+                            "html_instructions": "Turn <b>right</b> onto <b>Via Carlo Alberto</b>",
+                            "maneuver": "turn-right",
+                            "polyline": {
+                                "points": "__qwFqmgs@kAaC"
+                            },
+                            "start_location": {
+                                "lat": 40.7244798,
+                                "lng": 8.562968099999999
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "80 m",
+                                "value": 80
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 43
+                            },
+                            "end_location": {
+                                "lat": 40.7247839,
+                                "lng": 8.5643203
+                            },
+                            "html_instructions": "Turn <b>right</b> onto <b>Piazza d'Italia</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                            "maneuver": "turn-right",
+                            "polyline": {
+                                "points": "kaqwFsqgs@n@s@BE@E?E?EAEc@y@"
+                            },
+                            "start_location": {
+                                "lat": 40.7248592,
+                                "lng": 8.5636228
+                            },
+                            "travel_mode": "DRIVING"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                },
+                {
+                    "distance": {
+                        "text": "1.2 km",
+                        "value": 1172
+                    },
+                    "duration": {
+                        "text": "4 mins",
+                        "value": 232
+                    },
+                    "end_address": "Via Duca degli Abruzzi, 5, 07100 Sassari SS, Italy",
+                    "end_location": {
+                        "lat": 40.7167016,
+                        "lng": 8.5687348
+                    },
+                    "start_address": "Piazza d'Italia, 1, 07100 Sassari SS, Italy",
+                    "start_location": {
+                        "lat": 40.7247839,
+                        "lng": 8.5643203
+                    },
+                    "steps": [
+                        {
+                            "distance": {
+                                "text": "5 m",
+                                "value": 5
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 2
+                            },
+                            "end_location": {
+                                "lat": 40.7248151,
+                                "lng": 8.564370199999999
+                            },
+                            "html_instructions": "Head <b>northeast</b> on <b>Piazza d'Italia</b> toward <b>Via Roma</b>",
+                            "polyline": {
+                                "points": "{`qwF_vgs@GI"
+                            },
+                            "start_location": {
+                                "lat": 40.7247839,
+                                "lng": 8.5643203
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.9 km",
+                                "value": 855
+                            },
+                            "duration": {
+                                "text": "3 mins",
+                                "value": 188
+                            },
+                            "end_location": {
+                                "lat": 40.7189484,
+                                "lng": 8.570838
+                            },
+                            "html_instructions": "Turn <b>right</b> onto <b>Via Roma</b>",
+                            "maneuver": "turn-right",
+                            "polyline": {
+                                "points": "caqwFivgs@`AcA|BcCrCyChAmAbAkAp@u@TYf@g@v@y@|A_BXYv@{@Z]rA{AZ[n@q@bAgAbAeABK@GBMBQBG@I@A@A?A?C?C"
+                            },
+                            "start_location": {
+                                "lat": 40.7248151,
+                                "lng": 8.564370199999999
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "54 m",
+                                "value": 54
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 9
+                            },
+                            "end_location": {
+                                "lat": 40.7185117,
+                                "lng": 8.5706314
+                            },
+                            "html_instructions": "At the roundabout, take the <b>1st</b> exit onto <b>Piazza Conte di Moriana</b>",
+                            "maneuver": "roundabout-right",
+                            "polyline": {
+                                "points": "m|owFw~hs@@?@?@?@??A@?H@HBXDTTHH"
+                            },
+                            "start_location": {
+                                "lat": 40.7189484,
+                                "lng": 8.570838
+                            },
+                            "travel_mode": "DRIVING"
+                        },
+                        {
+                            "distance": {
+                                "text": "0.3 km",
+                                "value": 258
+                            },
+                            "duration": {
+                                "text": "1 min",
+                                "value": 33
+                            },
+                            "end_location": {
+                                "lat": 40.7167016,
+                                "lng": 8.5687348
+                            },
+                            "html_instructions": "Continue onto <b>Via Duca degli Abruzzi</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                            "polyline": {
+                                "points": "uyowFm}hs@TRn@z@n@j@zAtAZZzA|AFFFJNZ"
+                            },
+                            "start_location": {
+                                "lat": 40.7185117,
+                                "lng": 8.5706314
+                            },
+                            "travel_mode": "DRIVING"
+                        }
+                    ],
+                    "traffic_speed_entry": [],
+                    "via_waypoint": []
+                }
+            ],
+            "overview_polyline": {
+                "points": "kkpwFk{gs@sAiCwC`DkDxD{A~A_CfCkAaCr@y@@KAKk@cA|KoLrDcEfFoFzDgEfCmCDSLq@DMDAJ@b@H^^dAnAjC`CvBxBNRNZ"
+            },
+            "summary": "Via Camillo Benso Conte di Cavour/Via Cavour",
+            "warnings": [],
+            "waypoint_order": [
+                0
+            ]
+        }
+    ],
+    "status": "OK"
+}

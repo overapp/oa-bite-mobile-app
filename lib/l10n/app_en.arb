@@ -1,0 +1,179 @@
+{
+  "@@locale": "en",
+  "creditsCompanyLabel": "OverApp S.r.l",
+  "@creditsCompanyLabel": {
+    "description": "company name"
+  },
+  "creditsTextLabel": "This App is part of the project BITE which has received funding from Cascade funding calls of NODES Program, supported by the MUR - M4C2 1.5 of PNRR funded by the European Union - NextGenerationEU (Grant agreement no. ECS00000036).",
+  "@creditsTextLabel": {
+    "description": "credits screen label"
+  },
+  "nextLabel": "Next",
+  "@nextLabel": {
+    "description": "label for next button"
+  },
+  "reportScreen": "Report",
+  "bluetoothPermissionInfoLabel": "The BiTe app uses the Bluetooth connection to find points of interest near you.",
+  "@bluetoothPermissionInfoLabel": {
+    "description": "label used in the permission screen"
+  },
+  "@reportScreen": {
+    "description": "button label in POI Detail Screen"
+  },
+  "reports": "Report",
+  "@reports": {
+    "description": "App Bar Text Report Screen"
+  },
+  "reportAProblem": "Report a problem",
+  "@reportAProblem": {
+    "description": "Report screen subtitle"
+  },
+  "email": "Insert email",
+  "@email": {
+    "description": "report screen hint text"
+  },
+  "reportProblemHintText": "Tell us the problem (max. 150 characters)",
+  "@reportProblemHintText": {
+    "description": "text area hint text"
+  },
+  "sendText": "Send",
+  "@sendText": {
+    "description": "Send label"
+  },
+  "takeAPhoto": "Take a photo",
+  "@takeAPhoto": {
+    "description": "Report Screen label"
+  },
+  "orLabel": "or",
+  "@orLabel": {
+    "description": "Report Screen label"
+  },
+  "browse": "Browse",
+  "@browse": {
+    "description": "Report Screen button Label"
+  },
+  "searchPOI": "Search for a point of interest",
+  "@searchPOI": {
+    "description": "hint text of the search bar on the home page"
+  },
+  "showMoreResults": "Show more",
+  "@showMoreResults": {
+    "description": "label for show other serach results"
+  },
+  "attentionLabel": "Attention",
+  "@attentionLabel": {
+    "description": "label used inside alert"
+  },
+  "missingPhotoLibraryPermission": "Permits for access to the photo library were not granted",
+  "@missingPhotoLibraryPermission": {
+    "description": "Alert message for photo library missing permission"
+  },
+  "operationCompleted": "Completed",
+  "@operationCompleted": {
+    "description": "alert title"
+  },
+  "sendReport": "We have forwarded your report",
+  "@sendReport": {
+    "description": "alert message"
+  },
+  "availableServices": "Services available",
+  "@availableServices": {
+    "description": "poi detail title section"
+  },
+  "openingHours": "Opening hours",
+  "@openingHours": {
+    "description": "poi detail title section"
+  },
+  "descriptionLabel": "Description",
+  "@descriptionLabel": {
+    "description": "description label"
+  },
+  "homeTabLabel": "Map",
+  "@homeTabLabel": {
+    "description": "label home navigation bar"
+  },
+  "routesTabLabel": "Routes",
+  "@routesTabLabel": {
+    "description": "label routes navigation bar"
+  },
+  "routesSearchBarHintText": "Search route",
+  "@routesSearchBarHintText": {
+    "description": "hint text of search bar in routes screen"
+  },
+  "noRoutesFound": "No routes found",
+  "@noRoutesFound": {
+    "description": "label for empty list of routes"
+  },
+  "departureLabel": "Departure ",
+  "@departureLabel": {
+    "description": "Routes Detail screen label"
+  },
+  "arriveLabel": "Arrive ",
+  "@arriveLabel": {
+    "description": "Routes Detail screen label"
+  },
+  "pointsOfInterestLabel": "Points of interest",
+  "@pointsOfInterestLabel": {
+    "description": "Routes Detail screen label"
+  },
+  "startRoute": "Start route",
+  "@startRoute": {
+    "description": "Button label used in route detail screen"
+  },
+  "goToRoute": "Go to route",
+  "@goToRoute": {
+    "description": "Button label used in POI detail screen for show route with specific POI"
+  },
+  "availableRoutes": "available routes",
+  "@availableRoutes": {
+    "description": "label user in routes screen"
+  },
+  "pemissionDeniedLabel": "Without access to your location we cannot show you Points Of Interest!",
+  "@pemissionDeniedLabel": {
+    "description": "label used in home screen when permissions are denied"
+  },
+  "goToSettings": "Go to settings",
+  "@goToSettings": {
+    "description": "label for going to device settings"
+  },
+  "errorTitle": "Error",
+  "@errorTitle": {
+    "description": "title for error alert"
+  },
+  "genericError": "An error occurred!",
+  "@genericError": {
+    "description": "generic error message"
+  },
+  "tryAgain": "Try again",
+  "@tryAgain": {
+    "description": "button label for retrying an operation"
+  },
+  "invalidFormat": "Invalid format",
+  "@invalidFormat": {
+    "description": "error message for invalid format"
+  },
+  "enableLabel": "Enable",
+  "@enableLabel": {
+    "description": "label for enable button"
+  },
+  "closeLabel": "Close",
+  "@closeLabel": {
+    "description": "label for close button"
+  },
+  "okLabel": "Ok",
+  "@okLabel": {
+    "description": "label for ok button"
+  },
+  "creditsScreenTitle": "Credits",
+  "@creditsScreenTitle": {
+    "description": "title for the credits screen"
+  },
+  "madeWithLove": "Made with love by",
+  "@madeWithLove": {
+    "description": "credits screen label"
+  },
+  "imageFormatError": "The format of the inserted image is invalid",
+  "@imageFormatError": {
+    "description": "label for error alert"
+  }
+}

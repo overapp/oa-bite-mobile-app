@@ -1,0 +1,8 @@
+# l10n.yaml: Configuration for generating localization code
+
+# Directory containing App Resource Bundle (.arb) files that provide localization resources.
+arb-dir: lib/l10n
+# The .arb file that serves as a template for translations. In this case, app_en.arb contains the English translations.
+template-arb-file: app_en.arb
+# The name of the Dart file where the localization code will be generated.
+output-localization-file: app_localizations.dart

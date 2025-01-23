@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1013935221075",
+    "project_id": "bite-dev-52d8f",
+    "storage_bucket": "bite-dev-52d8f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013935221075:android:2effaa1f206938d5a359a6",
+        "android_client_info": {
+          "package_name": "it.oa.bite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAxwWJS4EiuGBKc4ROlZcNxWqMb_negc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013935221075:android:adb819c2035769eaa359a6",
+        "android_client_info": {
+          "package_name": "it.oa.bite.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAxwWJS4EiuGBKc4ROlZcNxWqMb_negc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013935221075:android:74b41eb50f35ad72a359a6",
+        "android_client_info": {
+          "package_name": "it.overapp.bite.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAxwWJS4EiuGBKc4ROlZcNxWqMb_negc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

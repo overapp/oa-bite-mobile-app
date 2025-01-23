@@ -1,0 +1,82 @@
+{
+    "items": [
+        {
+            "id": "6744b74e6b7050c7ed6b8a56",
+            "name": "Monte Furru",
+            "description": "La leggenda di Monte Furru (gli Spiriti Danzanti)",
+            "shortDescription": "La leggenda di Monte Furru",
+            "address": "07100 Sassari SS",
+            "beaconId": "67443e5e6d08ee20d0e3588f",
+            "media": [
+                "https://lh5.googleusercontent.com/p/AF1QipO5SOtKudaK6gjazQVAdwzlML5SiXWQ5wDeXOfN=w426-h240-k-no",
+                "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcShU4A_spY4vgZta_QEYDvOvlb-Fsk5518-KQA_ry1OBzEm7MgAZayQLk4DuF0o-EyhH60oese0QRcRJgLTbPKFuX6WPfNBneWc1MfmnQ"
+            ],
+            "openingHours": {
+                "monday": [
+                    {
+                        "from": "09:00",
+                        "to": "18:00"
+                    }
+                ],
+                "tuesday": [],
+                "wednesday": [],
+                "thursday": [],
+                "friday": [],
+                "saturday": [],
+                "sunday": []
+            },
+            "contacts": [],
+            "createdAt": null,
+            "createdBy": null,
+            "updatedAt": null,
+            "updatedBy": null,
+            "class": "Bite.Domain.Entities.Poi",
+            "location": {
+                "latitude": 40.7258,
+                "longitude": 8.5557
+            }
+        },
+        {
+            "id": "6744b74e6b7050c7ed6b8a57",
+            "name": "Museo Nazionale - Giovanni Antonio Sanna",
+            "description": "Tessuti, gioielli e opere d'arte di diversi periodi della storia sarda esposti in un edificio in stile neoclassico.",
+            "shortDescription": "Giovanni Antonio Sanna",
+            "address": "Via Roma, 64, 07100 Sassari SS",
+            "beaconId": "67443e5e6d08ee20d0e3588f",
+            "media": [
+                "https://lh3.googleusercontent.com/p/AF1QipO0vjR_9vWf-uzn7AbSVnkbdOA_KrFsPL2pN6X0=s1360-w1360-h1020",
+                "https://lh3.googleusercontent.com/p/AF1QipNLE_NvFMKNqSOUWpXkZ-i0h-pQHc7wnY1LGjZd=s1360-w1360-h1020"
+            ],
+            "openingHours": {
+                "monday": [
+                    {
+                        "from": "09:00",
+                        "to": "18:00"
+                    }
+                ],
+                "tuesday": [],
+                "wednesday": [],
+                "thursday": [],
+                "friday": [],
+                "saturday": [],
+                "sunday": []
+            },
+            "contacts": [],
+            "createdAt": null,
+            "createdBy": null,
+            "updatedAt": null,
+            "updatedBy": null,
+            "class": "Bite.Domain.Entities.Poi",
+            "location": {
+                "latitude": 40.74,
+                "longitude": 8.5557
+            }
+        }
+    ],
+    "pageNumber": 1,
+    "pageSize": 20,
+    "totalPages": 1,
+    "totalCount": 2,
+    "hasPreviousPage": false,
+    "hasNextPage": false
+}
