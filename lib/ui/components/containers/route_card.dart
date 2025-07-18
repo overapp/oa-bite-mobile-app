@@ -1,3 +1,4 @@
+import 'package:bite/extension/l10n_extension.dart';
 import 'package:bite/models/responses/route/detail/route_detail.dart';
 import 'package:bite/ui/components/icon/icon.dart';
 import 'package:bite/ui/components/text/text_body_b2.dart';
@@ -19,19 +20,33 @@ class RouteCard extends StatelessWidget {
     this.rightMargin = 0,
   });
 
-  String _getIcon(String category) {
-    switch (category.toLowerCase()) {
-      case 'archeology':
+  String _getIcon(RouteCategory category) {
+    switch (category) {
+      case RouteCategory.archeology:
         return 'icon_archeology';
-      case 'monuments':
+      case RouteCategory.monuments:
         return 'icon_monuments';
-      case 'tradition':
+      case RouteCategory.tradition:
         return 'icon_tradition';
-      case 'trekking':
+      case RouteCategory.trekking:
         return 'icon_trekking';
-      case 'undefined':
-      default:
+      case RouteCategory.undefined:
         return 'icon_waypoints';
+    }
+  }
+
+  String _getCategory(RouteCategory category, BuildContext context) {
+    switch (category) {
+      case RouteCategory.archeology:
+        return context.l10n!.archeology;
+      case RouteCategory.monuments:
+        return context.l10n!.monuments;
+      case RouteCategory.tradition:
+        return context.l10n!.tradition;
+      case RouteCategory.trekking:
+        return context.l10n!.trekking;
+      case RouteCategory.undefined:
+        return '';
     }
   }
 
@@ -64,7 +79,7 @@ class RouteCard extends StatelessWidget {
             children: [
               if (detail?.category != null) ...[
                 BiteIcon(
-                  iconName: _getIcon(detail?.category ?? ''),
+                  iconName: _getIcon(detail!.category),
                 ),
               ],
               const SizedBox(
@@ -75,7 +90,11 @@ class RouteCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 3,
               ),
-              BiteBodyB2Text(text: detail?.category ?? ''),
+              if (detail?.category != null) ...[
+                BiteBodyB2Text(
+                  text: _getCategory(detail!.category, context),
+                ),
+              ],
             ],
           ),
         ),

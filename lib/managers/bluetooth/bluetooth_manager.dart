@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:bite/models/bluetooth_status/bluetooth_status.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:bite/constants/constants.dart' as constants;
 import 'package:bite/utils/logger.dart';
@@ -50,6 +52,9 @@ class BluetoothManager {
   // reporting duplicates to the callback.
   Set<String> seenDeviceIds = {};
 
+  ValueNotifier<BluetoothStatus> bluetoothStatus =
+      ValueNotifier(BluetoothStatus.inactive);
+
   // init() sets up the BLE status listener. This allows us to respond to changes
   // in the BLE adapter state, such as the user turning Bluetooth on/off.
   Future<void> init() async {
@@ -68,6 +73,7 @@ class BluetoothManager {
         // If BLE is not ready (e.g., turned off or not supported),
         // we mark it as not ready and ensure no scanning is ongoing.
         isReadyToScan = false;
+
         stopScan();
       }
     });
@@ -103,6 +109,7 @@ class BluetoothManager {
     if (!isReadyToScan) {
       BiteLogger().info(
           'Bluetooth is off or not ready. The scan will begin once Bluetooth is turned on.');
+
       _pendingScan = true;
       return;
     }
@@ -115,7 +122,10 @@ class BluetoothManager {
 
     try {
       BiteLogger().info('Starting a new scanning session...');
+
       _isScanning = true;
+
+      bluetoothStatus.value = BluetoothStatus.active;
 
       // Clear the set of seen device IDs so this session can report devices again.
       seenDeviceIds.clear();
@@ -157,6 +167,7 @@ class BluetoothManager {
       // We only want to scan for a certain duration (e.g., constants.Bluetooth.timeoutSeconds).
       // After that time, we automatically stop the scan.
       _scanTimer?.cancel();
+
       _scanTimer = Timer(
           const Duration(seconds: constants.Bluetooth.timeoutSeconds), () {
         stopScan(onResult: onResult(null));
@@ -172,6 +183,7 @@ class BluetoothManager {
   Future<void> stopScan({bool shouldRestart = true, Function? onResult}) async {
     try {
       _isScanning = false;
+      bluetoothStatus.value = BluetoothStatus.inactive;
 
       // Cancel the scan subscription to stop receiving device events.
       await _scanSubscription?.cancel();
@@ -188,7 +200,9 @@ class BluetoothManager {
       if (!shouldRestart) {
         return;
       }
+
       _pauseTimer?.cancel();
+      bluetoothStatus.value = BluetoothStatus.timeout;
       _pauseTimer = Timer(
           const Duration(seconds: constants.Bluetooth.intervalBetweenScans),
           () {

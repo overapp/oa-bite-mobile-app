@@ -1,5 +1,5 @@
 name: bite
-description: "Progetto BITE finanziato nell’ambito dei Bandi a Cascata del Programma NODES, sostenuto dal MUR sui fondi PNRR MUR - M4C2 - Investimento 1.5 Avviso "Ecosistemi dell'Innovazione", nell'ambito del PNRR finanziato dall’Unione europea – NextGenerationEU (Grant agreement Cod. n.ECS00000036)."
+description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+4
+version: 1.0.0+10
 
 environment:
   sdk: ^3.5.3
@@ -103,10 +103,14 @@ dependencies:
 
   # https://pub.dev/packages/device_info_plus
   device_info_plus: ^11.1.1
+
+  # https://pub.dev/packages/flutter_dotenv
   flutter_dotenv: ^5.2.1
 
   # https://pub.dev/packages/dotted_border
   dotted_border: ^2.1.0
+
+  # https://pub.dev/packages/flutter_reactive_ble
   flutter_reactive_ble: ^5.3.1
 
   # https://pub.dev/packages/image_picker
@@ -118,11 +122,26 @@ dependencies:
   # https://pub.dev/packages/permission_handler
   permission_handler: ^11.3.1
 
-  #
+  # https://pub.dev/packages/infinite_scroll_pagination
   infinite_scroll_pagination: ^4.1.0
+
+  # https://pub.dev/packages/url_launcher
   url_launcher: ^6.3.1
+
+  # https://pub.dev/packages/crypto
   crypto: ^3.0.6
+
+  # https://pub.dev/packages/http
   http: ^1.2.2
+
+  # https://pub.dev/packages/camera
+  camera: ^0.11.1
+
+  # https://pub.dev/packages/camera_android
+  camera_android: ^0.10.10
+  flutter_typeahead: ^5.2.0
+  firebase_crashlytics: ^4.3.2
+  collection: ^1.19.0
 
 dev_dependencies:
   flutter_test:

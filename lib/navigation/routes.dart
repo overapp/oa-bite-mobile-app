@@ -1,8 +1,9 @@
 import 'package:bite/ui/scene/bluetooth_permission/bluetooth_permission_screen.dart';
+import 'package:bite/ui/scene/camera/camera_screen.dart';
 import 'package:bite/ui/scene/poi_detail/poi_detail_screen.dart';
-import 'package:bite/ui/scene/poi_detail_from_beacon/poi_detail_from_beacon_screen.dart';
 import 'package:bite/ui/scene/report_screen/report_screen.dart';
 import 'package:bite/ui/scene/route_detail/route_detail_screen.dart';
+import 'package:bite/ui/scene/search/search_screen.dart';
 import 'package:bite/ui/scene/splash/splash_screen.dart';
 import 'package:bite/ui/scene/tabs/home/home_screen.dart';
 import 'package:bite/ui/scene/tabs/credits/credits_screen.dart';
@@ -22,14 +23,17 @@ final class Routes {
 // Home Tab
   static const String home = '/home';
 
-// POI Detail
-  static const String poiDetail = '/poiDetail';
+// Search Screen
+  static const String searchScreen = '/searchScreen';
 
-// POI Detail by ID
-  static const String poiDetailById = '/poiDetailById';
+// POI Detail
+  static const String poiDetailScreen = '/poiDetailScreen';
 
 // Report Screen
   static const String reportScreen = '/reportScreen';
+
+// Camera Screen
+  static const String cameraScreen = '/cameraScreen';
 
 // Routes Tab
   static const String routes = '/routes';
@@ -94,14 +98,16 @@ final router = GoRouter(
         Routes.bluetoothPermission, const BluetoothPermissionScreen()),
     // Home Screen
     _buildGoRoute(Routes.home, const HomeScreen()),
+    // Search Screen
+    _buildGoRoute(Routes.searchScreen, const SearchScreen()),
     // Routes Screen
     _buildGoRoute(Routes.routes, const RoutesScreen()),
     // POI Detail
-    _buildGoRoute(Routes.poiDetail, const PoiDetailScreen()),
-    // POI Detail by ID
-    _buildGoRoute(Routes.poiDetailById, const PoiDetailFromBeaconScreen()),
+    _buildGoRoute(Routes.poiDetailScreen, const PoiDetailScreen()),
     // Report Screen
     _buildGoRoute(Routes.reportScreen, const ReportScreen()),
+    // Camera Screen
+    _buildGoRoute(Routes.cameraScreen, const CameraScreen()),
     // Route Detail Screen
     _buildGoRoute(Routes.routeDetailScreen, const RouteDetailScreen()),
     // Informations Screen

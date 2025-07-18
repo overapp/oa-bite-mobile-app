@@ -1,8 +1,10 @@
 import 'package:bite/extension/l10n_extension.dart';
+import 'package:bite/managers/bluetooth/bluetooth_manager.dart';
+import 'package:bite/models/bluetooth_status/bluetooth_status.dart';
 import 'package:bite/models/responses/poi/detail/poi_detail.dart';
+import 'package:bite/models/screen/poi_detail/screen_type.dart';
 import 'package:bite/navigation/routes.dart';
 import 'package:bite/ui/components/actions/common_buttons/filled_button.dart';
-import 'package:bite/ui/components/containers/search_result_card.dart';
 import 'package:bite/ui/components/icon/icon.dart';
 import 'package:bite/ui/components/text/text_button_bold.dart';
 import 'package:bite/ui/components/text/text_title_h1.dart';
@@ -27,8 +29,13 @@ class HomeScreen extends BasePageScreen {
 }
 
 class _HomeScreenState extends BasePageScreenState<HomeScreen> {
+  TextEditingController searchBarController = TextEditingController();
+
   @override
   Widget buildBody(BuildContext context) {
+    // Property to check if the keyboard is open
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return BlocProvider(
       create: (context) => HomeCubit(),
       child: Scaffold(
@@ -119,14 +126,15 @@ class _HomeScreenState extends BasePageScreenState<HomeScreen> {
                         return Marker(
                           icon: homeCubit.markerIcon ??
                               BitmapDescriptor.defaultMarker,
-                          markerId: MarkerId(poi.id),
+                          markerId: MarkerId(poi.id ?? ''),
                           position: LatLng(
-                            poi.location.latitude,
-                            poi.location.longitude,
+                            poi.location?.latitude ?? 90,
+                            poi.location?.longitude ?? 90,
                           ),
                           onTap: () {
-                            context.push(Routes.poiDetail, extra: {
+                            context.push(Routes.poiDetailScreen, extra: {
                               'poiId': poi.id,
+                              'screenType': PoiDetailScreenType.fromMap
                             });
                           },
                         );
@@ -159,64 +167,88 @@ class _HomeScreenState extends BasePageScreenState<HomeScreen> {
                       mapType: MapType.normal,
                     ),
                   ),
-                  //Search Bar
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 35),
-                          child: BiteSearchBar<PoiDetail>(
-                            hintText: context.l10n?.searchPOI ?? '',
-                            showMore:
-                                homeCubit.searchResults?.hasNextPage ?? false,
-                            displayStringForOption: (item) => item.name,
-                            resultBuilder: (item) => SearchResultCard(
-                              result: item,
-                              isLastElement: false,
-                            ),
-                            onShowMoreTapped: () {
-                              if (homeCubit.searchResults?.hasNextPage ??
-                                  false) {
-                                homeCubit.fullTextSearch(
-                                  homeCubit.currentPosition?.latitude ?? 90,
-                                  homeCubit.currentPosition?.longitude ?? 90,
-                                  homeCubit.searchedText,
-                                  homeCubit.currentPage + 1,
-                                );
-                              }
-                            },
-                            fetchOptions: (String query) async {
-                              if (query.length > 2) {
-                                homeCubit.fullTextSearch(
-                                  homeCubit.currentPosition?.latitude ?? 90,
-                                  homeCubit.currentPosition?.longitude ?? 90,
-                                  query,
-                                  1,
-                                );
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                      child: Column(
+                        children: [
+                          BiteSearchBar(
+                            searchBarController: searchBarController,
+                            onSelected: (value) {
+                              final PoiDetail result = value as PoiDetail;
 
-                                homeCubit.updateCurrentPage(1, query);
-
-                                return homeCubit.searchResults?.items ?? [];
-                              } else {
-                                return [];
-                              }
-                            },
-                            onSelected: (selectedResult) {
-                              final PoiDetail result = selectedResult;
-
-                              context.push(Routes.poiDetail, extra: {
+                              context.push(Routes.poiDetailScreen, extra: {
                                 'poiId': result.id,
+                                'screenType': PoiDetailScreenType.fromMap
                               });
 
                               BiteLogger().info('Selected result: $result');
                             },
+                            suggestionsCallback: (String pattern) async {
+                              if (pattern.isNotEmpty && pattern.length > 2) {
+                                homeCubit.searchedText = pattern;
+
+                                await homeCubit.fullTextSearch(
+                                  homeCubit.currentPosition?.latitude ?? 90,
+                                  homeCubit.currentPosition?.longitude ?? 90,
+                                  pattern,
+                                  1,
+                                );
+
+                                return homeCubit.searchResults?.items ?? [];
+                              }
+                              return [];
+                            },
+                            hasNextPage:
+                                homeCubit.searchResults?.hasNextPage ?? false,
+                            onShowMoreTap: () {
+                              context.push(
+                                Routes.searchScreen,
+                                extra: {
+                                  'searchText':
+                                      context.read<HomeCubit>().searchedText,
+                                  'latitude':
+                                      homeCubit.currentPosition?.latitude,
+                                  'longitude':
+                                      homeCubit.currentPosition?.longitude,
+                                },
+                              );
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 90),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
+
+                  if (!isKeyboardOpen)
+                    ValueListenableBuilder<BluetoothStatus>(
+                      valueListenable: BluetoothManager().bluetoothStatus,
+                      builder: (context, status, child) {
+                        return Positioned(
+                          right: 16,
+                          bottom: 16,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: BiteColors.primaryColor,
+                            ),
+                            child: BiteIcon(
+                              color: BiteColors.black,
+                              iconName: BluetoothManager()
+                                          .bluetoothStatus
+                                          .value ==
+                                      BluetoothStatus.active
+                                  ? 'icon_bluetooth_searching'
+                                  : BluetoothManager().bluetoothStatus.value ==
+                                          BluetoothStatus.inactive
+                                      ? 'icon_bluetooth_off'
+                                      : 'icon_timeout',
+                            ),
+                          ),
+                        );
+                      },
+                    )
                 ],
               );
             },

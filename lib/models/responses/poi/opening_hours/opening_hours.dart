@@ -9,13 +9,13 @@ part 'opening_hours.g.dart';
 @freezed
 class OpeningHours with _$OpeningHours {
   const factory OpeningHours({
-    @JsonKey(name: 'monday') required List<TimeInterval> monday,
-    @JsonKey(name: 'tuesday') required List<TimeInterval> tuesday,
-    @JsonKey(name: 'wednesday') required List<TimeInterval> wednesday,
-    @JsonKey(name: 'thursday') required List<TimeInterval> thursday,
-    @JsonKey(name: 'friday') required List<TimeInterval> friday,
-    @JsonKey(name: 'saturday') required List<TimeInterval> saturday,
-    @JsonKey(name: 'sunday') required List<TimeInterval> sunday,
+    @JsonKey(name: 'monday')  List<TimeInterval>? monday,
+    @JsonKey(name: 'tuesday')  List<TimeInterval>? tuesday,
+    @JsonKey(name: 'wednesday')  List<TimeInterval>? wednesday,
+    @JsonKey(name: 'thursday')  List<TimeInterval>? thursday,
+    @JsonKey(name: 'friday')  List<TimeInterval>? friday,
+    @JsonKey(name: 'saturday')  List<TimeInterval>? saturday,
+    @JsonKey(name: 'sunday')  List<TimeInterval>? sunday,
   }) = _OpeningHours;
 
   factory OpeningHours.fromJson(Map<String, dynamic> json) =>

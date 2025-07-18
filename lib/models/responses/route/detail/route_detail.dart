@@ -8,6 +8,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'route_detail.freezed.dart';
 part 'route_detail.g.dart';
 
+enum RouteCategory {
+  @JsonValue('archeology') archeology,
+  @JsonValue('monuments') monuments,
+  @JsonValue('tradition') tradition,
+  @JsonValue('trekking') trekking,
+  @JsonValue('undefined') undefined,
+}
+
+
 @freezed
 class RouteDetail with _$RouteDetail {
   const factory RouteDetail({
@@ -16,7 +25,7 @@ class RouteDetail with _$RouteDetail {
     @JsonKey(name: 'description') String? description,
     @JsonKey(name: 'stops') List<PoiInfo>? stops,
     @JsonKey(name: 'path') List<Location>? path,
-    @JsonKey(name: 'category') required String category,
+    @JsonKey(name: 'category') required RouteCategory category,
     @JsonKey(name: 'availableServices')
     required List<Service> availableServices,
   }) = _RouteDetail;

@@ -175,5 +175,75 @@
   "imageFormatError": "The format of the inserted image is invalid",
   "@imageFormatError": {
     "description": "label for error alert"
+  },
+  "previewLabel": "Preview",
+  "@previewLabel": {
+    "description": " label used in camera screen"
+  },
+  "takeAnotherPhoto": "Take another photo",
+  "@takeAnotherPhoto": {
+    "description": " label used in camera screen"
+  },
+  "continueWithReport": "Continue with the report",
+  "@continueWithReport": {
+    "description": " label used in camera screen"
+  },
+  "removeLabel": "Remove",
+  "@removeLabel": {
+    "description": " label used in report screen"
+  },
+  "archeology": "Archeology",
+  "@archeology": {
+    "description": "routes category"
+  },
+  "monuments": "Monuments",
+  "@monuments": {
+    "description": "routes category"
+  },
+  "tradition": "Tradition",
+  "@tradition": {
+    "description": "routes category"
+  },
+  "trekking": "Trekking",
+  "@trekking": {
+    "description": "routes category"
+  },
+  "undefined": "Undefinied",
+  "@undefined": {
+    "description": "routes category"
+  },
+  "noItemsFound": "No items found",
+  "@noItemsFound": {
+    "description": "label for empty list"
+  },
+  "poiCount": "found POI",
+  "@poiCount": {
+    "description": "label for number of found POI"
+  },
+  "activateRoute": "Activate route",
+  "@activateRoute": {},
+  "vistPoiQuestion": "Do you want to visit this point of interest?",
+  "@vistPoiQuestion": {},
+  "goToRouteLabel": "Go",
+  "@goToRouteLabel": {},
+  "dontVisit": "Don't visit",
+  "@dontVisit": {},
+  "alreadyActiveRoute": "There is already an active route",
+  "@alreadyActiveRoute": {},
+  "alreadyActiveRouteMessage": "It is possible to have only one active path, starting a new one will overwrite the current one",
+  "@alreadyActiveRouteMessage": {},
+  "startNewRoute": "Start new route",
+  "@startNewRoute": {},
+  "cancelLabel": "Cancel",
+  "@cancelLabel": {
+    "description": "label for cancel button"
+  },
+  "completeRoute": "Congratulations! You have completed the course",
+  "@completeRoute": {},
+  "visitedLabel": "You have visited {count} POIs",
+  "@visitedLabel": {
+    "placeholders": {
+      "count": {}
+    }
   }
 }

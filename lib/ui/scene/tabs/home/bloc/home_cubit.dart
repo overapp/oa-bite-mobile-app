@@ -5,6 +5,7 @@ import 'package:bite/constants/constants.dart' as constants;
 import 'package:bite/helpers/firebase_keys.dart';
 import 'package:bite/models/device_traffic_model/device_traffic.dart';
 import 'package:bite/models/local_notifications/local_notifications.dart';
+import 'package:bite/models/responses/poi/detail/poi_detail.dart';
 import 'package:bite/models/responses/pois_by_beacon_coordinates/pois_by_beacon_coordinates.dart';
 import 'package:bite/repository/manager/repo_manager/repository_manager.dart';
 import 'package:bite/services/firebase/firebase_service.dart';
@@ -24,9 +25,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial()) {
-    _checkBluetoothAndScan();
-    _drawInitialMap();
+    _checkBluetooth();
     _getFullTextTotalCount();
+    _drawInitialMap();
   }
 
   // API Response
@@ -49,6 +50,10 @@ class HomeCubit extends Cubit<HomeState> {
 
   // Current Position
   LatLng? currentPosition;
+
+  PoiDetail? closestPoi;
+
+  PermissionStatus? bluetoothPermissionStatus;
 
   // Custom Marker
   Future<void> _loadCustomMarkerIcons() async {
@@ -75,7 +80,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   // Method to get initial values for draw map
   Future<void> _drawInitialMap() async {
-    _checkPermissions();
+    checkPermissions();
+
     await _loadCustomMarkerIcons();
   }
 
@@ -114,17 +120,24 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   // start Bluetooth Scan
-  Future<void> _checkBluetoothAndScan() async {
-    final status = await Permission.bluetooth.status;
+  Future<void> _checkBluetooth() async {
+    bluetoothPermissionStatus = await Permission.bluetooth.status;
 
-    if (status.isGranted) {
+    if (bluetoothPermissionStatus?.isGranted == true) {
       BluetoothManager().init();
-      BluetoothManager().startScan(_processScanResults);
     }
   }
 
+  Future<void> _startBluetoothScan() async {
+    if (bluetoothPermissionStatus?.isGranted == false) {
+      BiteLogger().info('Bluetooth permission not granted');
+      return;
+    }
+    BluetoothManager().startScan(_processScanResults);
+  }
+
   // Check user permission for location
-  Future<void> _checkPermissions() async {
+  Future<void> checkPermissions() async {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied ||
@@ -148,6 +161,19 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  // Start checking user position
+  void _startPoiPositionCheck() async {
+    BiteLogger().info('Start poi position check');
+    _checkPoisInProximity();
+
+    Timer.periodic(
+      const Duration(seconds: 30),
+      (timer) async {
+        await _checkPoisInProximity();
+      },
+    );
+  }
+
   // Get user location
   Future<void> _getCurrentLocation() async {
     try {
@@ -167,6 +193,67 @@ class HomeCubit extends Cubit<HomeState> {
         HomeGetPositionError(
           message: e.toString(),
         ),
+      );
+    }
+  }
+
+  // Get user location
+  Future<void> _checkPoisInProximity() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition();
+
+      currentPosition ??= LatLng(position.latitude, position.longitude);
+
+      await _compareLastPositionAndCurrentPosition(
+        LatLng(position.latitude, position.longitude),
+      );
+
+      if (poisByBeaconCoordinates != null) {
+        for (var poi in poisByBeaconCoordinates!.items) {
+          double distance = Geolocator.distanceBetween(
+            currentPosition!.latitude,
+            currentPosition!.longitude,
+            poi.location?.latitude ?? 0,
+            poi.location?.longitude ?? 0,
+          );
+
+          if (distance < 50) {
+            BiteLogger().info('REACHABLE POI: ${poi.name}');
+            closestPoi = poi;
+
+            _startBluetoothScan();
+          }
+        }
+      }
+    } catch (e) {
+      emit(
+        HomeGetPositionError(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  // Compare last position with current position
+  Future<void> _compareLastPositionAndCurrentPosition(
+      LatLng newPosition) async {
+    BiteLogger().info('COMPARE POSITIONS');
+
+    double distance = Geolocator.distanceBetween(
+      currentPosition!.latitude,
+      currentPosition!.longitude,
+      newPosition.latitude,
+      newPosition.longitude,
+    );
+
+    // if distance is more then 500 meters, then get pois
+    if (distance > 500) {
+      updateMapPosition(currentPosition ?? const LatLng(90, 90));
+      BiteLogger().info('GET POIS, DISTANCE: $distance');
+      await getPoisByBeaconCoordinates(
+        currentPosition?.latitude ?? 90,
+        currentPosition?.longitude ?? 90,
+        1,
       );
     }
   }
@@ -229,7 +316,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     // Manage missing devices
     for (var missingDevice in missingDevices) {
-      putQMessage(missingDevice.id, DeviceTrafficDirection.exit);
+      putQMessage(getFeaaCode(missingDevice), DeviceTrafficDirection.exit);
       _discoveredDevices.remove(missingDevice);
       BiteLogger().info('Missing device: ${missingDevice.name}');
     }
@@ -246,39 +333,27 @@ class HomeCubit extends Cubit<HomeState> {
 
     // Add the newly discovered device to the list
     if (!_discoveredDevices.any((d) => d.id == device.id)) {
-      putQMessage(device.id, DeviceTrafficDirection.entry);
+      putQMessage(getFeaaCode(device), DeviceTrafficDirection.entry);
       _discoveredDevices.add(device);
     }
 
-    // Find the device with the strongest RSSI
-    DiscoveredDevice strongestDevice =
-        _discoveredDevices.reduce((current, next) {
-      return current.rssi > next.rssi ? current : next;
-    });
+    int rssiCalibrated = constants.Bluetooth.rssiCalibrated;
+    const double n = constants.Bluetooth.propagationFactor;
+    double distance = calculateDistance(device.rssi, rssiCalibrated, n);
 
-    // If the newly added device is the strongest so far, show a notification
-    if (strongestDevice == device) {
-      // No txPowerLevel with reactive_ble by default, use a calibrated constant
-      int rssiCalibrated = constants.Bluetooth.rssiCalibrated;
-      const double n = constants.Bluetooth.propagationFactor;
-      double distance = calculateDistance(device.rssi, rssiCalibrated, n);
+    _showNotification(
+      LocalNotification(
+        id: device.rssi,
+        title: 'Sei vicino a ${closestPoi?.name}',
+        body: 'Si trova a ${distance.toStringAsFixed(2)} metri',
+        payload: getPayLoad(device),
+        isAlarm: null,
+      ),
+      () {},
+    );
 
-      _showNotification(
-        LocalNotification(
-          id: device.rssi, // use RSSI as a unique notification id
-          title: 'Sei entrato nel raggio di un Poi!',
-          body: 'Si trova a ${distance.toStringAsFixed(2)} metri',
-          payload: getPayLoad(device),
-          isAlarm: null,
-        ),
-        () {
-          _checkBluetoothAndScan();
-        },
-      );
-
-      BiteLogger().info('IL PIÙ VICINO! ${device.id}: '
-          '"${device.name}" (RSSI: ${device.rssi})');
-    }
+    BiteLogger().info('IL PIÙ VICINO! ${device.id}: '
+        '"${device.name}" (RSSI: ${device.rssi})');
   }
 
 // Show Local Notification when he comes they find a beacon
@@ -317,6 +392,7 @@ class HomeCubit extends Cubit<HomeState> {
       (PoisByBeaconCoordinates result) {
         poisByBeaconCoordinates = result;
 
+        _startPoiPositionCheck();
         emit(HomeSuccess());
       },
       (typeDataError, status, message) {

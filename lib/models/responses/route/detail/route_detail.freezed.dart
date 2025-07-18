@@ -31,7 +31,7 @@ mixin _$RouteDetail {
   @JsonKey(name: 'path')
   List<Location>? get path => throw _privateConstructorUsedError;
   @JsonKey(name: 'category')
-  String get category => throw _privateConstructorUsedError;
+  RouteCategory get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'availableServices')
   List<Service> get availableServices => throw _privateConstructorUsedError;
 
@@ -57,7 +57,7 @@ abstract class $RouteDetailCopyWith<$Res> {
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'stops') List<PoiInfo>? stops,
       @JsonKey(name: 'path') List<Location>? path,
-      @JsonKey(name: 'category') String category,
+      @JsonKey(name: 'category') RouteCategory category,
       @JsonKey(name: 'availableServices') List<Service> availableServices});
 }
 
@@ -108,7 +108,7 @@ class _$RouteDetailCopyWithImpl<$Res, $Val extends RouteDetail>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RouteCategory,
       availableServices: null == availableServices
           ? _value.availableServices
           : availableServices // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ abstract class _$$RouteDetailImplCopyWith<$Res>
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'stops') List<PoiInfo>? stops,
       @JsonKey(name: 'path') List<Location>? path,
-      @JsonKey(name: 'category') String category,
+      @JsonKey(name: 'category') RouteCategory category,
       @JsonKey(name: 'availableServices') List<Service> availableServices});
 }
 
@@ -180,7 +180,7 @@ class __$$RouteDetailImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as RouteCategory,
       availableServices: null == availableServices
           ? _value._availableServices
           : availableServices // ignore: cast_nullable_to_non_nullable
@@ -241,7 +241,7 @@ class _$RouteDetailImpl implements _RouteDetail {
 
   @override
   @JsonKey(name: 'category')
-  final String category;
+  final RouteCategory category;
   final List<Service> _availableServices;
   @override
   @JsonKey(name: 'availableServices')
@@ -309,7 +309,7 @@ abstract class _RouteDetail implements RouteDetail {
       @JsonKey(name: 'description') final String? description,
       @JsonKey(name: 'stops') final List<PoiInfo>? stops,
       @JsonKey(name: 'path') final List<Location>? path,
-      @JsonKey(name: 'category') required final String category,
+      @JsonKey(name: 'category') required final RouteCategory category,
       @JsonKey(name: 'availableServices')
       required final List<Service> availableServices}) = _$RouteDetailImpl;
 
@@ -333,7 +333,7 @@ abstract class _RouteDetail implements RouteDetail {
   List<Location>? get path;
   @override
   @JsonKey(name: 'category')
-  String get category;
+  RouteCategory get category;
   @override
   @JsonKey(name: 'availableServices')
   List<Service> get availableServices;

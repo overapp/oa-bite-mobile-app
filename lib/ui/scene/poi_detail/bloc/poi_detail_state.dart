@@ -1,37 +1,58 @@
-
 import 'package:bite/models/responses/poi/detail/poi_detail.dart';
 import 'package:bite/models/responses/route/detail/route_detail.dart';
+import 'package:bite/models/screen/poi_detail/screen_type.dart';
 
 abstract class PoiDetailState {
-  final String poiId;
+  final String? poiId;
+  final String? beaconId;
+  final PoiDetailScreenType screenType;
 
-  PoiDetailState({required this.poiId});
+  PoiDetailState({
+    this.poiId,
+    this.beaconId,
+    this.screenType = PoiDetailScreenType.fromMap,
+  });
 }
 
 class PoiDetailInitial extends PoiDetailState {
-  PoiDetailInitial({required super.poiId});
+  PoiDetailInitial({
+    super.poiId,
+    super.beaconId,
+    super.screenType,
+  });
 }
 
 class PoiDetailLoading extends PoiDetailState {
-  PoiDetailLoading({required super.poiId});
+  PoiDetailLoading({
+    super.poiId,
+    super.beaconId,
+    super.screenType,
+  });
 }
 
 class PoiDetailSuccess extends PoiDetailState {
   final PoiDetail poiDetail;
   final int? poiAffluence;
+  final String? humidity;
+  final String? temperature;
 
-  PoiDetailSuccess({
-    required this.poiDetail,
-    this.poiAffluence,
-    required super.poiId,
-  });
+  PoiDetailSuccess(
+      {super.poiId,
+      super.beaconId,
+      super.screenType,
+      required this.poiDetail,
+      this.poiAffluence,
+      this.humidity,
+      this.temperature});
 }
 
 class PoiDetailGetRouteById extends PoiDetailState {
   final RouteDetail routeDetail;
 
   PoiDetailGetRouteById({
-    required super.poiId,
+    super.poiId,
+    super.beaconId,
+    super.screenType,
     required this.routeDetail,
   });
 }
@@ -40,7 +61,15 @@ class PoiDetailError extends PoiDetailState {
   String message;
 
   PoiDetailError({
+    super.poiId,
+    super.beaconId,
+    super.screenType,
     required this.message,
-    required super.poiId,
+  });
+}
+
+class PoiDetailScanDisposed extends PoiDetailState {
+  PoiDetailScanDisposed({
+    required super.beaconId,
   });
 }

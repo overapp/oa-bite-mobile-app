@@ -21,19 +21,19 @@ OpeningHours _$OpeningHoursFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OpeningHours {
   @JsonKey(name: 'monday')
-  List<TimeInterval> get monday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get monday => throw _privateConstructorUsedError;
   @JsonKey(name: 'tuesday')
-  List<TimeInterval> get tuesday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get tuesday => throw _privateConstructorUsedError;
   @JsonKey(name: 'wednesday')
-  List<TimeInterval> get wednesday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get wednesday => throw _privateConstructorUsedError;
   @JsonKey(name: 'thursday')
-  List<TimeInterval> get thursday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get thursday => throw _privateConstructorUsedError;
   @JsonKey(name: 'friday')
-  List<TimeInterval> get friday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get friday => throw _privateConstructorUsedError;
   @JsonKey(name: 'saturday')
-  List<TimeInterval> get saturday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get saturday => throw _privateConstructorUsedError;
   @JsonKey(name: 'sunday')
-  List<TimeInterval> get sunday => throw _privateConstructorUsedError;
+  List<TimeInterval>? get sunday => throw _privateConstructorUsedError;
 
   /// Serializes this OpeningHours to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,13 +52,13 @@ abstract class $OpeningHoursCopyWith<$Res> {
       _$OpeningHoursCopyWithImpl<$Res, OpeningHours>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'monday') List<TimeInterval> monday,
-      @JsonKey(name: 'tuesday') List<TimeInterval> tuesday,
-      @JsonKey(name: 'wednesday') List<TimeInterval> wednesday,
-      @JsonKey(name: 'thursday') List<TimeInterval> thursday,
-      @JsonKey(name: 'friday') List<TimeInterval> friday,
-      @JsonKey(name: 'saturday') List<TimeInterval> saturday,
-      @JsonKey(name: 'sunday') List<TimeInterval> sunday});
+      {@JsonKey(name: 'monday') List<TimeInterval>? monday,
+      @JsonKey(name: 'tuesday') List<TimeInterval>? tuesday,
+      @JsonKey(name: 'wednesday') List<TimeInterval>? wednesday,
+      @JsonKey(name: 'thursday') List<TimeInterval>? thursday,
+      @JsonKey(name: 'friday') List<TimeInterval>? friday,
+      @JsonKey(name: 'saturday') List<TimeInterval>? saturday,
+      @JsonKey(name: 'sunday') List<TimeInterval>? sunday});
 }
 
 /// @nodoc
@@ -76,43 +76,43 @@ class _$OpeningHoursCopyWithImpl<$Res, $Val extends OpeningHours>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? monday = null,
-    Object? tuesday = null,
-    Object? wednesday = null,
-    Object? thursday = null,
-    Object? friday = null,
-    Object? saturday = null,
-    Object? sunday = null,
+    Object? monday = freezed,
+    Object? tuesday = freezed,
+    Object? wednesday = freezed,
+    Object? thursday = freezed,
+    Object? friday = freezed,
+    Object? saturday = freezed,
+    Object? sunday = freezed,
   }) {
     return _then(_value.copyWith(
-      monday: null == monday
+      monday: freezed == monday
           ? _value.monday
           : monday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      tuesday: null == tuesday
+              as List<TimeInterval>?,
+      tuesday: freezed == tuesday
           ? _value.tuesday
           : tuesday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      wednesday: null == wednesday
+              as List<TimeInterval>?,
+      wednesday: freezed == wednesday
           ? _value.wednesday
           : wednesday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      thursday: null == thursday
+              as List<TimeInterval>?,
+      thursday: freezed == thursday
           ? _value.thursday
           : thursday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      friday: null == friday
+              as List<TimeInterval>?,
+      friday: freezed == friday
           ? _value.friday
           : friday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      saturday: null == saturday
+              as List<TimeInterval>?,
+      saturday: freezed == saturday
           ? _value.saturday
           : saturday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      sunday: null == sunday
+              as List<TimeInterval>?,
+      sunday: freezed == sunday
           ? _value.sunday
           : sunday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
+              as List<TimeInterval>?,
     ) as $Val);
   }
 }
@@ -126,13 +126,13 @@ abstract class _$$OpeningHoursImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'monday') List<TimeInterval> monday,
-      @JsonKey(name: 'tuesday') List<TimeInterval> tuesday,
-      @JsonKey(name: 'wednesday') List<TimeInterval> wednesday,
-      @JsonKey(name: 'thursday') List<TimeInterval> thursday,
-      @JsonKey(name: 'friday') List<TimeInterval> friday,
-      @JsonKey(name: 'saturday') List<TimeInterval> saturday,
-      @JsonKey(name: 'sunday') List<TimeInterval> sunday});
+      {@JsonKey(name: 'monday') List<TimeInterval>? monday,
+      @JsonKey(name: 'tuesday') List<TimeInterval>? tuesday,
+      @JsonKey(name: 'wednesday') List<TimeInterval>? wednesday,
+      @JsonKey(name: 'thursday') List<TimeInterval>? thursday,
+      @JsonKey(name: 'friday') List<TimeInterval>? friday,
+      @JsonKey(name: 'saturday') List<TimeInterval>? saturday,
+      @JsonKey(name: 'sunday') List<TimeInterval>? sunday});
 }
 
 /// @nodoc
@@ -148,43 +148,43 @@ class __$$OpeningHoursImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? monday = null,
-    Object? tuesday = null,
-    Object? wednesday = null,
-    Object? thursday = null,
-    Object? friday = null,
-    Object? saturday = null,
-    Object? sunday = null,
+    Object? monday = freezed,
+    Object? tuesday = freezed,
+    Object? wednesday = freezed,
+    Object? thursday = freezed,
+    Object? friday = freezed,
+    Object? saturday = freezed,
+    Object? sunday = freezed,
   }) {
     return _then(_$OpeningHoursImpl(
-      monday: null == monday
+      monday: freezed == monday
           ? _value._monday
           : monday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      tuesday: null == tuesday
+              as List<TimeInterval>?,
+      tuesday: freezed == tuesday
           ? _value._tuesday
           : tuesday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      wednesday: null == wednesday
+              as List<TimeInterval>?,
+      wednesday: freezed == wednesday
           ? _value._wednesday
           : wednesday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      thursday: null == thursday
+              as List<TimeInterval>?,
+      thursday: freezed == thursday
           ? _value._thursday
           : thursday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      friday: null == friday
+              as List<TimeInterval>?,
+      friday: freezed == friday
           ? _value._friday
           : friday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      saturday: null == saturday
+              as List<TimeInterval>?,
+      saturday: freezed == saturday
           ? _value._saturday
           : saturday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
-      sunday: null == sunday
+              as List<TimeInterval>?,
+      sunday: freezed == sunday
           ? _value._sunday
           : sunday // ignore: cast_nullable_to_non_nullable
-              as List<TimeInterval>,
+              as List<TimeInterval>?,
     ));
   }
 }
@@ -193,13 +193,13 @@ class __$$OpeningHoursImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OpeningHoursImpl implements _OpeningHours {
   const _$OpeningHoursImpl(
-      {@JsonKey(name: 'monday') required final List<TimeInterval> monday,
-      @JsonKey(name: 'tuesday') required final List<TimeInterval> tuesday,
-      @JsonKey(name: 'wednesday') required final List<TimeInterval> wednesday,
-      @JsonKey(name: 'thursday') required final List<TimeInterval> thursday,
-      @JsonKey(name: 'friday') required final List<TimeInterval> friday,
-      @JsonKey(name: 'saturday') required final List<TimeInterval> saturday,
-      @JsonKey(name: 'sunday') required final List<TimeInterval> sunday})
+      {@JsonKey(name: 'monday') final List<TimeInterval>? monday,
+      @JsonKey(name: 'tuesday') final List<TimeInterval>? tuesday,
+      @JsonKey(name: 'wednesday') final List<TimeInterval>? wednesday,
+      @JsonKey(name: 'thursday') final List<TimeInterval>? thursday,
+      @JsonKey(name: 'friday') final List<TimeInterval>? friday,
+      @JsonKey(name: 'saturday') final List<TimeInterval>? saturday,
+      @JsonKey(name: 'sunday') final List<TimeInterval>? sunday})
       : _monday = monday,
         _tuesday = tuesday,
         _wednesday = wednesday,
@@ -211,67 +211,81 @@ class _$OpeningHoursImpl implements _OpeningHours {
   factory _$OpeningHoursImpl.fromJson(Map<String, dynamic> json) =>
       _$$OpeningHoursImplFromJson(json);
 
-  final List<TimeInterval> _monday;
+  final List<TimeInterval>? _monday;
   @override
   @JsonKey(name: 'monday')
-  List<TimeInterval> get monday {
+  List<TimeInterval>? get monday {
+    final value = _monday;
+    if (value == null) return null;
     if (_monday is EqualUnmodifiableListView) return _monday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_monday);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<TimeInterval> _tuesday;
+  final List<TimeInterval>? _tuesday;
   @override
   @JsonKey(name: 'tuesday')
-  List<TimeInterval> get tuesday {
+  List<TimeInterval>? get tuesday {
+    final value = _tuesday;
+    if (value == null) return null;
     if (_tuesday is EqualUnmodifiableListView) return _tuesday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tuesday);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<TimeInterval> _wednesday;
+  final List<TimeInterval>? _wednesday;
   @override
   @JsonKey(name: 'wednesday')
-  List<TimeInterval> get wednesday {
+  List<TimeInterval>? get wednesday {
+    final value = _wednesday;
+    if (value == null) return null;
     if (_wednesday is EqualUnmodifiableListView) return _wednesday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_wednesday);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<TimeInterval> _thursday;
+  final List<TimeInterval>? _thursday;
   @override
   @JsonKey(name: 'thursday')
-  List<TimeInterval> get thursday {
+  List<TimeInterval>? get thursday {
+    final value = _thursday;
+    if (value == null) return null;
     if (_thursday is EqualUnmodifiableListView) return _thursday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_thursday);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<TimeInterval> _friday;
+  final List<TimeInterval>? _friday;
   @override
   @JsonKey(name: 'friday')
-  List<TimeInterval> get friday {
+  List<TimeInterval>? get friday {
+    final value = _friday;
+    if (value == null) return null;
     if (_friday is EqualUnmodifiableListView) return _friday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_friday);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<TimeInterval> _saturday;
+  final List<TimeInterval>? _saturday;
   @override
   @JsonKey(name: 'saturday')
-  List<TimeInterval> get saturday {
+  List<TimeInterval>? get saturday {
+    final value = _saturday;
+    if (value == null) return null;
     if (_saturday is EqualUnmodifiableListView) return _saturday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_saturday);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<TimeInterval> _sunday;
+  final List<TimeInterval>? _sunday;
   @override
   @JsonKey(name: 'sunday')
-  List<TimeInterval> get sunday {
+  List<TimeInterval>? get sunday {
+    final value = _sunday;
+    if (value == null) return null;
     if (_sunday is EqualUnmodifiableListView) return _sunday;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sunday);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -324,39 +338,39 @@ class _$OpeningHoursImpl implements _OpeningHours {
 
 abstract class _OpeningHours implements OpeningHours {
   const factory _OpeningHours(
-      {@JsonKey(name: 'monday') required final List<TimeInterval> monday,
-      @JsonKey(name: 'tuesday') required final List<TimeInterval> tuesday,
-      @JsonKey(name: 'wednesday') required final List<TimeInterval> wednesday,
-      @JsonKey(name: 'thursday') required final List<TimeInterval> thursday,
-      @JsonKey(name: 'friday') required final List<TimeInterval> friday,
-      @JsonKey(name: 'saturday') required final List<TimeInterval> saturday,
-      @JsonKey(name: 'sunday')
-      required final List<TimeInterval> sunday}) = _$OpeningHoursImpl;
+          {@JsonKey(name: 'monday') final List<TimeInterval>? monday,
+          @JsonKey(name: 'tuesday') final List<TimeInterval>? tuesday,
+          @JsonKey(name: 'wednesday') final List<TimeInterval>? wednesday,
+          @JsonKey(name: 'thursday') final List<TimeInterval>? thursday,
+          @JsonKey(name: 'friday') final List<TimeInterval>? friday,
+          @JsonKey(name: 'saturday') final List<TimeInterval>? saturday,
+          @JsonKey(name: 'sunday') final List<TimeInterval>? sunday}) =
+      _$OpeningHoursImpl;
 
   factory _OpeningHours.fromJson(Map<String, dynamic> json) =
       _$OpeningHoursImpl.fromJson;
 
   @override
   @JsonKey(name: 'monday')
-  List<TimeInterval> get monday;
+  List<TimeInterval>? get monday;
   @override
   @JsonKey(name: 'tuesday')
-  List<TimeInterval> get tuesday;
+  List<TimeInterval>? get tuesday;
   @override
   @JsonKey(name: 'wednesday')
-  List<TimeInterval> get wednesday;
+  List<TimeInterval>? get wednesday;
   @override
   @JsonKey(name: 'thursday')
-  List<TimeInterval> get thursday;
+  List<TimeInterval>? get thursday;
   @override
   @JsonKey(name: 'friday')
-  List<TimeInterval> get friday;
+  List<TimeInterval>? get friday;
   @override
   @JsonKey(name: 'saturday')
-  List<TimeInterval> get saturday;
+  List<TimeInterval>? get saturday;
   @override
   @JsonKey(name: 'sunday')
-  List<TimeInterval> get sunday;
+  List<TimeInterval>? get sunday;
 
   /// Create a copy of OpeningHours
   /// with the given fields replaced by the non-null parameter values.

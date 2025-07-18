@@ -1,4 +1,3 @@
-
 // Used when MockMode is enabled in order to simulate server endpoints
 enum ApiCalls {
   getPoiById,
@@ -6,7 +5,9 @@ enum ApiCalls {
   getPoisbyBeaconExternalId,
   getRoutes,
   getRoutebyId,
+  getRoutesDestinations,
   getPoiAffluence,
   sendInstallationId,
-  requireUploadLink
+  requireUploadLink,
+  sensorsReading,
 }

@@ -45,11 +45,11 @@ class DrawRoutesManager {
 
     BiteLogger().info('Request Routes URL: $url');
 
-    // Call Google API
+    //Call Google API
     NetworkResponse? poi = await RoutesApi().request(
       url: url,
       requestType: RequestType.GET,
-    );
+    );  
 
     return poi.maybeWhen(
       onSuccess: (response, status, message) async {

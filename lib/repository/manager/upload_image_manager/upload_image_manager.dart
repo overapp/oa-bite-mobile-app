@@ -34,7 +34,7 @@ class UploadImageManager {
 
     return upload.maybeWhen(onSuccess: (response, status, message) async {
       final headers = response.headers;
-      final etag = headers?['etag']?.first;
+      final etag = headers?['etag']?.first.replaceAll('"', '');
 
       BiteLogger().info('ETag: $etag');
 

@@ -14,12 +14,13 @@
     
     <!-- New Bluetooth permissions in Android 12
     https://developer.android.com/about/versions/12/features/bluetooth-permissions -->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" tools:remove="android:usesPermissionFlags"/>   <!--android:usesPermissionFlags="neverForLocation"-->
+    <uses-permission android:name="android.permission.BLUETOOTH"  />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"  tools:remove="android:usesPermissionFlags"/>
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
 
     <!-- legacy for Android 11 or lower -->
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH"  />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
 <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30"/>  -->
 
@@ -27,7 +28,6 @@
 <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="28" />  -->
 
     <!-- Use of gallery, camera and read external storage permission-->
-  <!--  <uses-permission android:name="android.permission.CAMERA"/> -->
     <uses-permission android:name="android.permission.GALLERY"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 

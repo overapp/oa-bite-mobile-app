@@ -21,9 +21,9 @@ PoiDetail _$PoiDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PoiDetail {
   @JsonKey(name: 'id')
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'description')
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'shortDescription')
@@ -31,9 +31,9 @@ mixin _$PoiDetail {
   @JsonKey(name: 'address')
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: 'beaconId')
-  String get beaconId => throw _privateConstructorUsedError;
+  String? get beaconId => throw _privateConstructorUsedError;
   @JsonKey(name: 'media')
-  List<String>? get media => throw _privateConstructorUsedError;
+  List<Media>? get media => throw _privateConstructorUsedError;
   @JsonKey(name: 'openingHours')
   OpeningHours? get openingHours => throw _privateConstructorUsedError;
   @JsonKey(name: 'contacts')
@@ -50,7 +50,7 @@ mixin _$PoiDetail {
   @JsonKey(name: 'services')
   List<String>? get services => throw _privateConstructorUsedError;
   @JsonKey(name: 'location')
-  Location get location => throw _privateConstructorUsedError;
+  Location? get location => throw _privateConstructorUsedError;
   @JsonKey(name: 'class')
   String? get path => throw _privateConstructorUsedError;
 
@@ -70,13 +70,13 @@ abstract class $PoiDetailCopyWith<$Res> {
       _$PoiDetailCopyWithImpl<$Res, PoiDetail>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'name') String name,
+      {@JsonKey(name: 'id') String? id,
+      @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'shortDescription') String? shortDescription,
       @JsonKey(name: 'address') String? address,
-      @JsonKey(name: 'beaconId') String beaconId,
-      @JsonKey(name: 'media') List<String>? media,
+      @JsonKey(name: 'beaconId') String? beaconId,
+      @JsonKey(name: 'media') List<Media>? media,
       @JsonKey(name: 'openingHours') OpeningHours? openingHours,
       @JsonKey(name: 'contacts') List<Map<String, dynamic>>? contacts,
       @JsonKey(name: 'createdAt') String? createdAt,
@@ -84,11 +84,11 @@ abstract class $PoiDetailCopyWith<$Res> {
       @JsonKey(name: 'updatedAt') String? updatedAt,
       @JsonKey(name: 'updatedBy') String? updatedBy,
       @JsonKey(name: 'services') List<String>? services,
-      @JsonKey(name: 'location') Location location,
+      @JsonKey(name: 'location') Location? location,
       @JsonKey(name: 'class') String? path});
 
   $OpeningHoursCopyWith<$Res>? get openingHours;
-  $LocationCopyWith<$Res> get location;
+  $LocationCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -106,12 +106,12 @@ class _$PoiDetailCopyWithImpl<$Res, $Val extends PoiDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
     Object? description = freezed,
     Object? shortDescription = freezed,
     Object? address = freezed,
-    Object? beaconId = null,
+    Object? beaconId = freezed,
     Object? media = freezed,
     Object? openingHours = freezed,
     Object? contacts = freezed,
@@ -120,18 +120,18 @@ class _$PoiDetailCopyWithImpl<$Res, $Val extends PoiDetail>
     Object? updatedAt = freezed,
     Object? updatedBy = freezed,
     Object? services = freezed,
-    Object? location = null,
+    Object? location = freezed,
     Object? path = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -144,14 +144,14 @@ class _$PoiDetailCopyWithImpl<$Res, $Val extends PoiDetail>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      beaconId: null == beaconId
+      beaconId: freezed == beaconId
           ? _value.beaconId
           : beaconId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       media: freezed == media
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Media>?,
       openingHours: freezed == openingHours
           ? _value.openingHours
           : openingHours // ignore: cast_nullable_to_non_nullable
@@ -180,10 +180,10 @@ class _$PoiDetailCopyWithImpl<$Res, $Val extends PoiDetail>
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      location: null == location
+      location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as Location,
+              as Location?,
       path: freezed == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -209,8 +209,12 @@ class _$PoiDetailCopyWithImpl<$Res, $Val extends PoiDetail>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res> get location {
-    return $LocationCopyWith<$Res>(_value.location, (value) {
+  $LocationCopyWith<$Res>? get location {
+    if (_value.location == null) {
+      return null;
+    }
+
+    return $LocationCopyWith<$Res>(_value.location!, (value) {
       return _then(_value.copyWith(location: value) as $Val);
     });
   }
@@ -225,13 +229,13 @@ abstract class _$$PoiDetailImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'name') String name,
+      {@JsonKey(name: 'id') String? id,
+      @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'shortDescription') String? shortDescription,
       @JsonKey(name: 'address') String? address,
-      @JsonKey(name: 'beaconId') String beaconId,
-      @JsonKey(name: 'media') List<String>? media,
+      @JsonKey(name: 'beaconId') String? beaconId,
+      @JsonKey(name: 'media') List<Media>? media,
       @JsonKey(name: 'openingHours') OpeningHours? openingHours,
       @JsonKey(name: 'contacts') List<Map<String, dynamic>>? contacts,
       @JsonKey(name: 'createdAt') String? createdAt,
@@ -239,13 +243,13 @@ abstract class _$$PoiDetailImplCopyWith<$Res>
       @JsonKey(name: 'updatedAt') String? updatedAt,
       @JsonKey(name: 'updatedBy') String? updatedBy,
       @JsonKey(name: 'services') List<String>? services,
-      @JsonKey(name: 'location') Location location,
+      @JsonKey(name: 'location') Location? location,
       @JsonKey(name: 'class') String? path});
 
   @override
   $OpeningHoursCopyWith<$Res>? get openingHours;
   @override
-  $LocationCopyWith<$Res> get location;
+  $LocationCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -261,12 +265,12 @@ class __$$PoiDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
     Object? description = freezed,
     Object? shortDescription = freezed,
     Object? address = freezed,
-    Object? beaconId = null,
+    Object? beaconId = freezed,
     Object? media = freezed,
     Object? openingHours = freezed,
     Object? contacts = freezed,
@@ -275,18 +279,18 @@ class __$$PoiDetailImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? updatedBy = freezed,
     Object? services = freezed,
-    Object? location = null,
+    Object? location = freezed,
     Object? path = freezed,
   }) {
     return _then(_$PoiDetailImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -299,14 +303,14 @@ class __$$PoiDetailImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      beaconId: null == beaconId
+      beaconId: freezed == beaconId
           ? _value.beaconId
           : beaconId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       media: freezed == media
           ? _value._media
           : media // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Media>?,
       openingHours: freezed == openingHours
           ? _value.openingHours
           : openingHours // ignore: cast_nullable_to_non_nullable
@@ -335,10 +339,10 @@ class __$$PoiDetailImplCopyWithImpl<$Res>
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      location: null == location
+      location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as Location,
+              as Location?,
       path: freezed == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -351,13 +355,13 @@ class __$$PoiDetailImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PoiDetailImpl implements _PoiDetail {
   const _$PoiDetailImpl(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'name') required this.name,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
       @JsonKey(name: 'description') this.description,
       @JsonKey(name: 'shortDescription') this.shortDescription,
       @JsonKey(name: 'address') this.address,
-      @JsonKey(name: 'beaconId') required this.beaconId,
-      @JsonKey(name: 'media') final List<String>? media,
+      @JsonKey(name: 'beaconId') this.beaconId,
+      @JsonKey(name: 'media') final List<Media>? media,
       @JsonKey(name: 'openingHours') this.openingHours,
       @JsonKey(name: 'contacts') final List<Map<String, dynamic>>? contacts,
       @JsonKey(name: 'createdAt') this.createdAt,
@@ -365,7 +369,7 @@ class _$PoiDetailImpl implements _PoiDetail {
       @JsonKey(name: 'updatedAt') this.updatedAt,
       @JsonKey(name: 'updatedBy') this.updatedBy,
       @JsonKey(name: 'services') final List<String>? services,
-      @JsonKey(name: 'location') required this.location,
+      @JsonKey(name: 'location') this.location,
       @JsonKey(name: 'class') this.path})
       : _media = media,
         _contacts = contacts,
@@ -376,10 +380,10 @@ class _$PoiDetailImpl implements _PoiDetail {
 
   @override
   @JsonKey(name: 'id')
-  final String id;
+  final String? id;
   @override
   @JsonKey(name: 'name')
-  final String name;
+  final String? name;
   @override
   @JsonKey(name: 'description')
   final String? description;
@@ -391,11 +395,11 @@ class _$PoiDetailImpl implements _PoiDetail {
   final String? address;
   @override
   @JsonKey(name: 'beaconId')
-  final String beaconId;
-  final List<String>? _media;
+  final String? beaconId;
+  final List<Media>? _media;
   @override
   @JsonKey(name: 'media')
-  List<String>? get media {
+  List<Media>? get media {
     final value = _media;
     if (value == null) return null;
     if (_media is EqualUnmodifiableListView) return _media;
@@ -442,7 +446,7 @@ class _$PoiDetailImpl implements _PoiDetail {
 
   @override
   @JsonKey(name: 'location')
-  final Location location;
+  final Location? location;
   @override
   @JsonKey(name: 'class')
   final String? path;
@@ -523,13 +527,13 @@ class _$PoiDetailImpl implements _PoiDetail {
 
 abstract class _PoiDetail implements PoiDetail {
   const factory _PoiDetail(
-      {@JsonKey(name: 'id') required final String id,
-      @JsonKey(name: 'name') required final String name,
+      {@JsonKey(name: 'id') final String? id,
+      @JsonKey(name: 'name') final String? name,
       @JsonKey(name: 'description') final String? description,
       @JsonKey(name: 'shortDescription') final String? shortDescription,
       @JsonKey(name: 'address') final String? address,
-      @JsonKey(name: 'beaconId') required final String beaconId,
-      @JsonKey(name: 'media') final List<String>? media,
+      @JsonKey(name: 'beaconId') final String? beaconId,
+      @JsonKey(name: 'media') final List<Media>? media,
       @JsonKey(name: 'openingHours') final OpeningHours? openingHours,
       @JsonKey(name: 'contacts') final List<Map<String, dynamic>>? contacts,
       @JsonKey(name: 'createdAt') final String? createdAt,
@@ -537,7 +541,7 @@ abstract class _PoiDetail implements PoiDetail {
       @JsonKey(name: 'updatedAt') final String? updatedAt,
       @JsonKey(name: 'updatedBy') final String? updatedBy,
       @JsonKey(name: 'services') final List<String>? services,
-      @JsonKey(name: 'location') required final Location location,
+      @JsonKey(name: 'location') final Location? location,
       @JsonKey(name: 'class') final String? path}) = _$PoiDetailImpl;
 
   factory _PoiDetail.fromJson(Map<String, dynamic> json) =
@@ -545,10 +549,10 @@ abstract class _PoiDetail implements PoiDetail {
 
   @override
   @JsonKey(name: 'id')
-  String get id;
+  String? get id;
   @override
   @JsonKey(name: 'name')
-  String get name;
+  String? get name;
   @override
   @JsonKey(name: 'description')
   String? get description;
@@ -560,10 +564,10 @@ abstract class _PoiDetail implements PoiDetail {
   String? get address;
   @override
   @JsonKey(name: 'beaconId')
-  String get beaconId;
+  String? get beaconId;
   @override
   @JsonKey(name: 'media')
-  List<String>? get media;
+  List<Media>? get media;
   @override
   @JsonKey(name: 'openingHours')
   OpeningHours? get openingHours;
@@ -587,7 +591,7 @@ abstract class _PoiDetail implements PoiDetail {
   List<String>? get services;
   @override
   @JsonKey(name: 'location')
-  Location get location;
+  Location? get location;
   @override
   @JsonKey(name: 'class')
   String? get path;
@@ -804,5 +808,226 @@ abstract class _PoiTranslation implements PoiTranslation {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PoiTranslationImplCopyWith<_$PoiTranslationImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Media _$MediaFromJson(Map<String, dynamic> json) {
+  return _Media.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Media {
+  @JsonKey(name: 'ref')
+  String? get ref => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  String? get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'url')
+  String? get url => throw _privateConstructorUsedError;
+
+  /// Serializes this Media to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Media
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $MediaCopyWith<Media> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MediaCopyWith<$Res> {
+  factory $MediaCopyWith(Media value, $Res Function(Media) then) =
+      _$MediaCopyWithImpl<$Res, Media>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'ref') String? ref,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'type') String? type,
+      @JsonKey(name: 'url') String? url});
+}
+
+/// @nodoc
+class _$MediaCopyWithImpl<$Res, $Val extends Media>
+    implements $MediaCopyWith<$Res> {
+  _$MediaCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Media
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ref = freezed,
+    Object? name = freezed,
+    Object? type = freezed,
+    Object? url = freezed,
+  }) {
+    return _then(_value.copyWith(
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MediaImplCopyWith<$Res> implements $MediaCopyWith<$Res> {
+  factory _$$MediaImplCopyWith(
+          _$MediaImpl value, $Res Function(_$MediaImpl) then) =
+      __$$MediaImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'ref') String? ref,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'type') String? type,
+      @JsonKey(name: 'url') String? url});
+}
+
+/// @nodoc
+class __$$MediaImplCopyWithImpl<$Res>
+    extends _$MediaCopyWithImpl<$Res, _$MediaImpl>
+    implements _$$MediaImplCopyWith<$Res> {
+  __$$MediaImplCopyWithImpl(
+      _$MediaImpl _value, $Res Function(_$MediaImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Media
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ref = freezed,
+    Object? name = freezed,
+    Object? type = freezed,
+    Object? url = freezed,
+  }) {
+    return _then(_$MediaImpl(
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MediaImpl implements _Media {
+  const _$MediaImpl(
+      {@JsonKey(name: 'ref') this.ref,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'type') this.type,
+      @JsonKey(name: 'url') this.url});
+
+  factory _$MediaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'ref')
+  final String? ref;
+  @override
+  @JsonKey(name: 'name')
+  final String? name;
+  @override
+  @JsonKey(name: 'type')
+  final String? type;
+  @override
+  @JsonKey(name: 'url')
+  final String? url;
+
+  @override
+  String toString() {
+    return 'Media(ref: $ref, name: $name, type: $type, url: $url)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MediaImpl &&
+            (identical(other.ref, ref) || other.ref == ref) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, ref, name, type, url);
+
+  /// Create a copy of Media
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MediaImplCopyWith<_$MediaImpl> get copyWith =>
+      __$$MediaImplCopyWithImpl<_$MediaImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MediaImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Media implements Media {
+  const factory _Media(
+      {@JsonKey(name: 'ref') final String? ref,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(name: 'type') final String? type,
+      @JsonKey(name: 'url') final String? url}) = _$MediaImpl;
+
+  factory _Media.fromJson(Map<String, dynamic> json) = _$MediaImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'ref')
+  String? get ref;
+  @override
+  @JsonKey(name: 'name')
+  String? get name;
+  @override
+  @JsonKey(name: 'type')
+  String? get type;
+  @override
+  @JsonKey(name: 'url')
+  String? get url;
+
+  /// Create a copy of Media
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MediaImplCopyWith<_$MediaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,0 +1,4 @@
+enum PoiDetailScreenType {
+  fromMap,
+  fromNotification,
+}

@@ -17,7 +17,7 @@ _$RouteDetailImpl _$$RouteDetailImplFromJson(Map<String, dynamic> json) =>
       path: (json['path'] as List<dynamic>?)
           ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
           .toList(),
-      category: json['category'] as String,
+      category: $enumDecode(_$RouteCategoryEnumMap, json['category']),
       availableServices: (json['availableServices'] as List<dynamic>)
           .map((e) => Service.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -30,6 +30,14 @@ Map<String, dynamic> _$$RouteDetailImplToJson(_$RouteDetailImpl instance) =>
       'description': instance.description,
       'stops': instance.stops,
       'path': instance.path,
-      'category': instance.category,
+      'category': _$RouteCategoryEnumMap[instance.category]!,
       'availableServices': instance.availableServices,
     };
+
+const _$RouteCategoryEnumMap = {
+  RouteCategory.archeology: 'archeology',
+  RouteCategory.monuments: 'monuments',
+  RouteCategory.tradition: 'tradition',
+  RouteCategory.trekking: 'trekking',
+  RouteCategory.undefined: 'undefined',
+};

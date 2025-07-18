@@ -6,6 +6,7 @@ class BiteTextArea extends StatelessWidget {
   final String hintText;
   final Color bgColor;
   final Color hintTextColor;
+  final Function(String)? onChanged;
 
   const BiteTextArea({
     super.key,
@@ -13,6 +14,7 @@ class BiteTextArea extends StatelessWidget {
     required this.hintText,
     this.bgColor = Colors.transparent,
     this.hintTextColor = BiteColors.neutral1,
+    this.onChanged,
   });
 
   @override
@@ -50,6 +52,11 @@ class BiteTextArea extends StatelessWidget {
             ),
           ),
         ),
+        onChanged: (value) {
+          if (onChanged != null) {
+            onChanged!(value);
+          }
+        },
       ),
     );
   }

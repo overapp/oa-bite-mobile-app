@@ -14,32 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-RequestUploadLink _$RequesUploadLinkFromJson(Map<String, dynamic> json) {
+RequestUploadLink _$RequestUploadLinkFromJson(Map<String, dynamic> json) {
   return _RequesUploadLink.fromJson(json);
 }
 
 /// @nodoc
-mixin _$RequesUploadLink {
+mixin _$RequestUploadLink {
   @JsonKey(name: 'url')
   String? get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'relatedEntityId')
   String? get relatedEntityId => throw _privateConstructorUsedError;
 
-  /// Serializes this RequesUploadLink to a JSON map.
+  /// Serializes this RequestUploadLink to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of RequesUploadLink
+  /// Create a copy of RequestUploadLink
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RequesUploadLinkCopyWith<RequestUploadLink> get copyWith =>
+  $RequestUploadLinkCopyWith<RequestUploadLink> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RequesUploadLinkCopyWith<$Res> {
-  factory $RequesUploadLinkCopyWith(
+abstract class $RequestUploadLinkCopyWith<$Res> {
+  factory $RequestUploadLinkCopyWith(
           RequestUploadLink value, $Res Function(RequestUploadLink) then) =
-      _$RequesUploadLinkCopyWithImpl<$Res, RequestUploadLink>;
+      _$RequestUploadLinkCopyWithImpl<$Res, RequestUploadLink>;
   @useResult
   $Res call(
       {@JsonKey(name: 'url') String? url,
@@ -47,16 +47,16 @@ abstract class $RequesUploadLinkCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RequesUploadLinkCopyWithImpl<$Res, $Val extends RequestUploadLink>
-    implements $RequesUploadLinkCopyWith<$Res> {
-  _$RequesUploadLinkCopyWithImpl(this._value, this._then);
+class _$RequestUploadLinkCopyWithImpl<$Res, $Val extends RequestUploadLink>
+    implements $RequestUploadLinkCopyWith<$Res> {
+  _$RequestUploadLinkCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RequesUploadLink
+  /// Create a copy of RequestUploadLink
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -79,7 +79,7 @@ class _$RequesUploadLinkCopyWithImpl<$Res, $Val extends RequestUploadLink>
 
 /// @nodoc
 abstract class _$$RequesUploadLinkImplCopyWith<$Res>
-    implements $RequesUploadLinkCopyWith<$Res> {
+    implements $RequestUploadLinkCopyWith<$Res> {
   factory _$$RequesUploadLinkImplCopyWith(_$RequesUploadLinkImpl value,
           $Res Function(_$RequesUploadLinkImpl) then) =
       __$$RequesUploadLinkImplCopyWithImpl<$Res>;
@@ -92,13 +92,13 @@ abstract class _$$RequesUploadLinkImplCopyWith<$Res>
 
 /// @nodoc
 class __$$RequesUploadLinkImplCopyWithImpl<$Res>
-    extends _$RequesUploadLinkCopyWithImpl<$Res, _$RequesUploadLinkImpl>
+    extends _$RequestUploadLinkCopyWithImpl<$Res, _$RequesUploadLinkImpl>
     implements _$$RequesUploadLinkImplCopyWith<$Res> {
   __$$RequesUploadLinkImplCopyWithImpl(_$RequesUploadLinkImpl _value,
       $Res Function(_$RequesUploadLinkImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RequesUploadLink
+  /// Create a copy of RequestUploadLink
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -138,7 +138,7 @@ class _$RequesUploadLinkImpl implements _RequesUploadLink {
 
   @override
   String toString() {
-    return 'RequesUploadLink(url: $url, relatedEntityId: $relatedEntityId)';
+    return 'RequestUploadLink(url: $url, relatedEntityId: $relatedEntityId)';
   }
 
   @override
@@ -155,7 +155,7 @@ class _$RequesUploadLinkImpl implements _RequesUploadLink {
   @override
   int get hashCode => Object.hash(runtimeType, url, relatedEntityId);
 
-  /// Create a copy of RequesUploadLink
+  /// Create a copy of RequestUploadLink
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -188,7 +188,7 @@ abstract class _RequesUploadLink implements RequestUploadLink {
   @JsonKey(name: 'relatedEntityId')
   String? get relatedEntityId;
 
-  /// Create a copy of RequesUploadLink
+  /// Create a copy of RequestUploadLink
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

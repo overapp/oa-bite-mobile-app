@@ -1,5 +1,6 @@
 import 'package:bite/extension/l10n_extension.dart';
 import 'package:bite/models/responses/poi/detail/poi_detail.dart';
+import 'package:bite/models/screen/poi_detail/screen_type.dart';
 import 'package:bite/navigation/routes.dart';
 import 'package:bite/ui/components/communications/progress_indicator.dart';
 import 'package:bite/ui/scene/base_page_screen/base_page_screen.dart';
@@ -26,6 +27,8 @@ class PoiDetailScreen extends BasePageScreen {
 
 class _PoiDetailScreenState extends State<PoiDetailScreen> {
   String? poiId;
+  String? beaconExternalId;
+  PoiDetailScreenType? screenType;
   int carouselPosition = 0;
 
   String _buildOpeningHoursText(PoiDetail? poiDetail) {
@@ -66,12 +69,18 @@ class _PoiDetailScreenState extends State<PoiDetailScreen> {
         GoRouterState.of(context).extra as Map<String, dynamic>?;
     if (extraParams != null) {
       poiId = extraParams['poiId'] as String?;
+      beaconExternalId = extraParams['beaconExternalId'] as String?;
+      screenType = extraParams['screenType'] as PoiDetailScreenType?;
     }
 
     return Container(
       color: BiteColors.bgColor,
       child: BlocProvider(
-        create: (context) => PoiDetailCubit(poiId ?? ''),
+        create: (context) => PoiDetailCubit(
+          poiId ?? '',
+          beaconExternalId ?? '',
+          screenType ?? PoiDetailScreenType.fromMap,
+        ),
         child: BlocListener<PoiDetailCubit, PoiDetailState>(
           listener: (context, state) {
             if (state is PoiDetailGetRouteById) {
@@ -109,12 +118,6 @@ class _PoiDetailScreenState extends State<PoiDetailScreen> {
                 );
               }
 
-              if (state is PoiDetailError) {
-                return const Center(
-                  child: SizedBox(),
-                );
-              }
-
               if (state is PoiDetailSuccess) {
                 poiDetail = state.poiDetail;
               }
@@ -124,7 +127,7 @@ class _PoiDetailScreenState extends State<PoiDetailScreen> {
                   backgroundColor: BiteColors.bgColor,
                   title: poiDetail?.name ?? '',
                   onIconTap: () {
-                    context.pop();
+                    context.pop(true);
                   },
                 ),
                 body: Padding(
@@ -153,8 +156,8 @@ class _PoiDetailScreenState extends State<PoiDetailScreen> {
                                             child: AspectRatio(
                                               aspectRatio: 16 / 9,
                                               child: Image.network(
-                                                poiDetail?.media?[
-                                                        pagePosition] ??
+                                                poiDetail?.media?[pagePosition]
+                                                        .url ??
                                                     '',
                                                 fit: BoxFit.cover,
                                               ),
@@ -232,6 +235,29 @@ class _PoiDetailScreenState extends State<PoiDetailScreen> {
                                     ? state.poiAffluence.toString()
                                     : '-',
                                 prefixIconName: 'icon_partner_exchange',
+                                isLoading: context
+                                        .read<PoiDetailCubit>()
+                                        .poiAffluence ==
+                                    null,
+                              ),
+                              BiteChip(
+                                label:
+                                    context.read<PoiDetailCubit>().temperature,
+                                prefixIconName: 'icon_thermostat',
+                                isLoading: context
+                                        .read<PoiDetailCubit>()
+                                        .temperature ==
+                                    null,
+                              ),
+                              BiteChip(
+                                label: context
+                                    .read<PoiDetailCubit>()
+                                    .humidity
+                                    .toString(),
+                                prefixIconName: 'icon_humidity_percentage',
+                                isLoading:
+                                    context.read<PoiDetailCubit>().humidity ==
+                                        null,
                               ),
                             ],
                           ),
@@ -306,7 +332,7 @@ class _PoiDetailScreenState extends State<PoiDetailScreen> {
                             children: [
                               BiteOutlinedButton(
                                 onPressed: () {
-                                  cubit.getRoutebyId(state.poiId);
+                                  cubit.getRoutebyId(state.poiId ?? '');
                                 },
                                 width: double.maxFinite,
                                 text: context.l10n!.goToRoute,

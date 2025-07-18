@@ -60,6 +60,11 @@ class ReportCubit extends Cubit<ReportState> {
         poiId, selectedImage, email, _getMime(selectedImage), description);
   }
 
+  void removePicture() {
+    selectedImage = null;
+    emit(ReportRemoveImage(poiId: state.poiId));
+  }
+
 // API calls
 
   Future<void> requestUploadLink(

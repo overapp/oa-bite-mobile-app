@@ -23,9 +23,9 @@ class Api {
   static Dio createDio() {
     var dio = Dio(BaseOptions(
       baseUrl: constants.Http.baseApiUrl,
-      receiveTimeout: const Duration(seconds: 60),
-      connectTimeout: const Duration(seconds: 60),
-      sendTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 120),
+      connectTimeout: const Duration(seconds: 120),
+      sendTimeout: const Duration(seconds: 120),
     ));
 
     if (constants.Http.debug) {

@@ -1,0 +1,25 @@
+{
+    "id": "67a4940a64261e02f985e487",
+    "name": "Museo di Arte Moderna",
+    "description": "Un museo dedicato all'arte moderna e contemporanea.",
+    "shortDescription": "Museo di arte moderna.",
+    "address": "Via delle Belle Arti 1, Milano, Italia",
+    "beaconId": "beacon_789",
+    "media": null,
+    "openingHours": null,
+    "contacts": null,
+    "createdAt": "2023-01-15T10:30:00Z",
+    "createdBy": "admin_user",
+    "updatedAt": "2024-06-20T14:00:00Z",
+    "updatedBy": "editor_user",
+    "services": [
+        "wifi",
+        "audioguide",
+        "accessibility"
+    ],
+    "location": {
+        "lat": 45.4668,
+        "lng": 9.1905
+    },
+    "class": ""
+}

@@ -1,192 +1,163 @@
 import 'package:bite/extension/l10n_extension.dart';
+import 'package:bite/models/responses/poi/detail/poi_detail.dart';
 import 'package:bite/ui/components/communications/progress_indicator.dart';
+import 'package:bite/ui/components/containers/search_result_card.dart';
+import 'package:bite/ui/components/dividers/horizontal_dividers.dart';
 import 'package:bite/ui/components/icon/icon.dart';
+import 'package:bite/ui/components/text/text_body_b1.dart';
 import 'package:bite/ui/components/text/text_button_bold.dart';
 import 'package:bite/ui/themes/bite_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-
-class BiteSearchBar<T extends Object> extends StatefulWidget {
-  final String hintText;
-  final String? prefixIconName;
-  final double borderRadius;
-  final Color borderColor;
-  final InputBorder border;
-  final Color fillColor;
-  final Future<List<T>> Function(String query) fetchOptions;
-  final Function(T) onSelected;
-  final Function? onFocused;
-  final bool autofocus;
-  final bool showMore;
-  final Function? onShowMoreTapped;
-  final String Function(T) displayStringForOption;
-  final Widget Function(T) resultBuilder;
+class BiteSearchBar extends StatefulWidget {
+  final TextEditingController searchBarController;
+  final Function(Object?) onSelected;
+  final Function(String) suggestionsCallback;
+  final bool hasNextPage;
+  final Function onShowMoreTap;
 
   const BiteSearchBar({
     super.key,
-    required this.hintText,
-    required this.fetchOptions,
+    required this.searchBarController,
     required this.onSelected,
-    required this.displayStringForOption,
-    required this.resultBuilder,
-    this.onFocused,
-    this.prefixIconName = 'icon_search',
-    this.borderColor = BiteColors.primaryColor,
-    this.fillColor = BiteColors.primaryColor,
-    this.borderRadius = 16,
-    this.border = InputBorder.none,
-    this.autofocus = false,
-    this.showMore = false,
-    this.onShowMoreTapped,
+    required this.suggestionsCallback,
+    required this.hasNextPage,
+    required this.onShowMoreTap,
   });
 
   @override
-  State<StatefulWidget> createState() => _BiteSearchBarState<T>();
+  State<BiteSearchBar> createState() => _BiteSearchBarState();
 }
 
-class _BiteSearchBarState<T extends Object> extends State<BiteSearchBar<T>> {
-  List<T> _options = [];
-  bool _isLoading = false;
-
-  void _onTextChanged(String query) async {
-    if (query.isEmpty) {
-      setState(() {
-        _options = [];
-      });
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    List<T> results = await widget.fetchOptions(query);
-
-    setState(() {
-      _options = results;
-      _isLoading = false;
-    });
-  }
-
+class _BiteSearchBarState extends State<BiteSearchBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: widget.fillColor,
-        borderRadius: BorderRadius.circular(widget.borderRadius),
-        border: Border.all(
-          color: widget.borderColor,
-          width: 1,
+    return TypeAheadField(
+      controller: widget.searchBarController,
+
+      // Text Field Style
+      builder: (context, controller, focusNode) => TextField(
+        controller: controller,
+        focusNode: focusNode,
+        //autofocus: true,
+        style: const TextStyle(
+          color: BiteColors.black,
+          fontFamily: 'Urbanist',
+          fontWeight: FontWeight.w500,
+          fontSize: 16,
+        ),
+        cursorColor: BiteColors.black,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: BiteColors.primaryColor,
+          hintText: context.l10n!.searchPOI,
+          prefixIcon: const BiteIcon(
+            iconName: 'icon_search',
+            margin: EdgeInsets.fromLTRB(16, 12, 16, 12),
+            color: BiteColors.textColor,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(
+              color: BiteColors.textColor,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(
+              color: BiteColors.primaryColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: const BorderSide(
+              color: BiteColors.primaryColor,
+            ),
+          ),
         ),
       ),
-      child: LayoutBuilder(
-        builder: (context, constraints) => Autocomplete<T>(
-          optionsBuilder: (TextEditingValue textEditingValue) {
-            if (textEditingValue.text.isEmpty) {
-              return Iterable<T>.empty();
-            }
-            return _options;
-          },
-          displayStringForOption: widget.displayStringForOption,
-          onSelected: widget.onSelected,
-          fieldViewBuilder: (
-            BuildContext context,
-            TextEditingController textEditingController,
-            FocusNode focusNode,
-            VoidCallback onFieldSubmitted,
-          ) {
-            return TextField(
-              controller: textEditingController,
-              focusNode: focusNode,
-              autofocus: widget.autofocus,
-              onChanged: _onTextChanged,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: BiteColors.textColor,
-              ),
-              onTap:
-                  widget.onFocused != null ? () => widget.onFocused!() : null,
-              decoration: InputDecoration(
-                prefixIcon: widget.prefixIconName != null
-                    ? Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 15, 16, 15),
-                        child: BiteIcon(
-                          iconName: widget.prefixIconName!,
-                          color: BiteColors.textColor,
-                        ),
-                      )
-                    : null,
-                hintText: widget.hintText,
-                hintStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: BiteColors.textColor,
+
+      // On Result Tap
+      onSelected: (value) {
+        widget.onSelected(value);
+      },
+      suggestionsCallback: (search) => widget.suggestionsCallback(search),
+
+      // Progress Indicator
+      loadingBuilder: (context) {
+        return const Padding(
+          padding: EdgeInsets.all(16),
+          child: Center(
+            child:
+                BiteProgressIndicator(type: BiteProgressIndicatorType.circular),
+          ),
+        );
+      },
+
+      // Box Results Style
+      decorationBuilder: (context, child) {
+        return Container(
+          decoration: BoxDecoration(
+            color: BiteColors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Search Result Card
+              child,
+              if (widget.hasNextPage) ...[
+                const BiteHorizontalDivider(
+                  verticalPadding: 0,
+                  height: 0,
+                  thickness: 1,
                 ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 15),
-                border: widget.border,
-                suffixIcon: _isLoading
-                    ? const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: BiteProgressIndicator(
-                          type: BiteProgressIndicatorType.circular,
-                        ),
-                      )
-                    : null,
-              ),
-              cursorColor: BiteColors.textColor,
-            );
-          },
-          optionsViewBuilder: (BuildContext context,
-              AutocompleteOnSelected<T> onSelected, Iterable<T> options) {
-            return Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                margin: const EdgeInsets.only(top: 8),
-                width: constraints.biggest.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: widget.borderColor,
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(top: 8),
-                      itemCount: options.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final T option = options.elementAt(index);
-                        return GestureDetector(
-                          onTap: () => onSelected(option),
-                          child: widget.resultBuilder(option),
-                        );
-                      },
-                    ),
-                    if (widget.showMore)
-                      GestureDetector(
-                        onTap: widget.onShowMoreTapped != null
-                            ? () => widget.onShowMoreTapped!()
-                            : null,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: BiteButtonBoldText(
-                            text: context.l10n!.showMoreResults,
-                            textColor: BiteColors.primaryColor,
-                          ),
-                        ),
+                // Show More
+                GestureDetector(
+                  onTap: () {
+                    widget.onShowMoreTap();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: BiteButtonBoldText(
+                        text: context.l10n!.showMoreResults,
+                        textColor: BiteColors.primaryColor,
                       ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+                    ),
+                  ),
+                )
+              ]
+            ],
+          ),
+        );
+      },
+      // Error Label
+      errorBuilder: (context, error) {
+        return Center(
+          child: BiteBodyB1Text(text: context.l10n!.genericError),
+        );
+      },
+      // Result Card
+      itemBuilder: (context, suggestion) {
+        return SearchResultCard(
+          result: suggestion as PoiDetail,
+        );
+      },
+      // No results
+      hideOnEmpty: true,
+      emptyBuilder: (context) {
+        return const SizedBox.shrink();
+      },
+      // Divider
+      itemSeparatorBuilder: (context, index) {
+        return const BiteHorizontalDivider(
+          verticalPadding: 0,
+          height: 0,
+          thickness: 1,
+        );
+      },
     );
   }
 }

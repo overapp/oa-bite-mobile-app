@@ -10,13 +10,13 @@ part 'poi_detail.g.dart';
 @freezed
 class PoiDetail with _$PoiDetail {
   const factory PoiDetail({
-    @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'id') String? id,
+    @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'description') String? description,
     @JsonKey(name: 'shortDescription') String? shortDescription,
     @JsonKey(name: 'address') String? address,
-    @JsonKey(name: 'beaconId') required String beaconId,
-    @JsonKey(name: 'media') List<String>? media,
+    @JsonKey(name: 'beaconId') String? beaconId,
+    @JsonKey(name: 'media') List<Media>? media,
     @JsonKey(name: 'openingHours') OpeningHours? openingHours,
     @JsonKey(name: 'contacts') List<Map<String, dynamic>>? contacts,
     @JsonKey(name: 'createdAt') String? createdAt,
@@ -24,7 +24,7 @@ class PoiDetail with _$PoiDetail {
     @JsonKey(name: 'updatedAt') String? updatedAt,
     @JsonKey(name: 'updatedBy') String? updatedBy,
     @JsonKey(name: 'services') List<String>? services,
-    @JsonKey(name: 'location') required Location location,
+    @JsonKey(name: 'location') Location? location,
     @JsonKey(name: 'class') String? path,
   }) = _PoiDetail;
 
@@ -42,4 +42,16 @@ class PoiTranslation with _$PoiTranslation {
 
   factory PoiTranslation.fromJson(Map<String, dynamic> json) =>
       _$PoiTranslationFromJson(json);
+}
+
+@freezed
+class Media with _$Media {
+  const factory Media({
+    @JsonKey(name: 'ref') String? ref,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'type') String? type,
+    @JsonKey(name: 'url') String? url,
+  }) = _Media;
+
+  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 }

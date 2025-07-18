@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:bite/models/shared_preferences/active_route/active_route.dart';
 import 'package:bite/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,6 +10,7 @@ class StorageUtils {
 
   // Keys
   static const deviceId = 'deviceId';
+  static const activeRoute = 'activeRoute';
 
   static Future<StorageUtils> getInstance() async {
     _instance ??= StorageUtils();
@@ -81,6 +85,21 @@ class StorageUtils {
     } catch (err) {
       BiteLogger().info(err.toString());
       return Future.value(null);
+    }
+  }
+
+// Method to get active route saved in Shared Preferences
+  Future<ActiveRoute?> getActiveRoute(String key) async {
+    try {
+      String? jsonString = _preferences?.getString(key);
+      if (jsonString == null) return null;
+
+      Map<String, dynamic> jsonData = json.decode(jsonString);
+
+      return ActiveRoute.fromJson(jsonData);
+    } catch (err) {
+      BiteLogger().info('Error retrieving active route: \$err');
+      return null;
     }
   }
 }

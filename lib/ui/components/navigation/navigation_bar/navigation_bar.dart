@@ -1,5 +1,6 @@
 import 'package:bite/ui/components/icon/icon.dart';
 import 'package:bite/ui/components/navigation/navigation_bar/navigation_destination.dart';
+import 'package:bite/ui/themes/bite_colors.dart';
 import 'package:flutter/material.dart';
 
 class BiteNavigationBar extends StatelessWidget {
@@ -15,14 +16,28 @@ class BiteNavigationBar extends StatelessWidget {
     required this.currentPageIndex,
     required this.destinations,
     this.indicatorColor = Colors.transparent,
-    this.navigationBarBackgroundColor = Colors.white,
+    this.navigationBarBackgroundColor = Colors.transparent,
   });
 
   List<NavigationDestination> _getDestinations() {
     return destinations
         .map((e) => NavigationDestination(
-              icon: BiteIcon(iconName: e.iconName),
-              selectedIcon: BiteIcon(iconName: e.selectedIconName),
+              icon: e.showBadge
+                  ? Badge(
+                      backgroundColor: BiteColors.errorColor,
+                      alignment: Alignment.topRight,
+                      child: BiteIcon(
+                        iconName: e.iconName,
+                        color: e.iconColor,
+                      ))
+                  : BiteIcon(
+                      iconName: e.iconName,
+                      color: e.iconColor,
+                    ),
+              selectedIcon: BiteIcon(
+                iconName: e.selectedIconName,
+                color: e.selectedIconColor,
+              ),
               label: e.label,
               tooltip: e.tooltip,
               enabled: e.isEnabled,
@@ -35,14 +50,6 @@ class BiteNavigationBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: navigationBarBackgroundColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(40),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, -2),
-          ),
-        ],
       ),
       child: Theme(
         data: Theme.of(context).copyWith(

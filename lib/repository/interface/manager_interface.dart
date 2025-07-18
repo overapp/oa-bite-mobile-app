@@ -1,4 +1,6 @@
 import 'package:bite/models/get_device_info/get_device_info.dart';
+import 'package:bite/models/responses/location/location.dart';
+import 'package:bite/models/sensor_reading_model/sensor_reading.dart';
 
 // Manager Interface which includes every method that needs to be implemented in order to perform an API call.
 
@@ -51,6 +53,16 @@ abstract class Manager {
     Function error,
   );
 
+  /// {POST} API call return suggestion fr next poi to visit
+  /// EndPoint: /public/routes/{routeId}/destinations
+  Future<dynamic> getRoutesDestinations(
+    Location userCurrentLocation,
+    String routeId,
+    List<String> poiIds,
+    Function success,
+    Function error,
+  );
+
   /// {GET} API call for retrieving POI affluence.
   /// EndPoint: /api/pois/{poiId}/traffic/statistics
   Future<dynamic> getPoiAffluence(
@@ -77,7 +89,7 @@ abstract class Manager {
     Function error,
   );
 
-/// {PUT} API call for confirm image upload on Azure Blob Storage.
+  /// {PUT} API call for confirm image upload on Azure Blob Storage.
   /// EndPoint: /public/media/pois/{poiId}/alerts/{alertId}/confirm
   Future<dynamic> confirmUpload(
     String poiId,
@@ -87,6 +99,15 @@ abstract class Manager {
     String email,
     String alertId,
     String description,
+    Function success,
+    Function error,
+  );
+
+  /// {GET} API call for retrieving sensors data when scan bluetooth isn't available.
+  /// EndPoint: /api/pois/{poiId}/sensor-readings/{type}/latest
+  Future<dynamic> getSensorReading(
+    String poiId,
+    MeasurementType type,
     Function success,
     Function error,
   );

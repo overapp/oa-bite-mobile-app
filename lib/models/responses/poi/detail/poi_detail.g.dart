@@ -8,14 +8,15 @@ part of 'poi_detail.dart';
 
 _$PoiDetailImpl _$$PoiDetailImplFromJson(Map<String, dynamic> json) =>
     _$PoiDetailImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
       description: json['description'] as String?,
       shortDescription: json['shortDescription'] as String?,
       address: json['address'] as String?,
-      beaconId: json['beaconId'] as String,
-      media:
-          (json['media'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      beaconId: json['beaconId'] as String?,
+      media: (json['media'] as List<dynamic>?)
+          ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
+          .toList(),
       openingHours: json['openingHours'] == null
           ? null
           : OpeningHours.fromJson(json['openingHours'] as Map<String, dynamic>),
@@ -29,7 +30,9 @@ _$PoiDetailImpl _$$PoiDetailImplFromJson(Map<String, dynamic> json) =>
       services: (json['services'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      location: json['location'] == null
+          ? null
+          : Location.fromJson(json['location'] as Map<String, dynamic>),
       path: json['class'] as String?,
     );
 
@@ -66,4 +69,19 @@ Map<String, dynamic> _$$PoiTranslationImplToJson(
       'name': instance.name,
       'description': instance.description,
       'shortDescription': instance.shortDescription,
+    };
+
+_$MediaImpl _$$MediaImplFromJson(Map<String, dynamic> json) => _$MediaImpl(
+      ref: json['ref'] as String?,
+      name: json['name'] as String?,
+      type: json['type'] as String?,
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$$MediaImplToJson(_$MediaImpl instance) =>
+    <String, dynamic>{
+      'ref': instance.ref,
+      'name': instance.name,
+      'type': instance.type,
+      'url': instance.url,
     };

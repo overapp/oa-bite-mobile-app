@@ -8,26 +8,26 @@ part of 'opening_hours.dart';
 
 _$OpeningHoursImpl _$$OpeningHoursImplFromJson(Map<String, dynamic> json) =>
     _$OpeningHoursImpl(
-      monday: (json['monday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      monday: (json['monday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
-      tuesday: (json['tuesday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      tuesday: (json['tuesday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
-      wednesday: (json['wednesday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      wednesday: (json['wednesday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
-      thursday: (json['thursday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      thursday: (json['thursday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
-      friday: (json['friday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      friday: (json['friday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
-      saturday: (json['saturday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      saturday: (json['saturday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
-      sunday: (json['sunday'] as List<dynamic>)
-          .map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
+      sunday: (json['sunday'] as List<dynamic>?)
+          ?.map((e) => TimeInterval.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

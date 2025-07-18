@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "id": "67ebac0c891f231da006bf45",
+            "name": "Nome percorso",
+            "description": "Descrizione percorso",
+            "stops": [
+                {
+                    "poiId": "67a4940a64261e02f985e487",
+                    "order": 0,
+                    "name": "Amministrazione OverApp",
+                    "description": "Ufficio per le risorse amministrative dell'azienda",
+                    "shortDescription": "Ufficio",
+                    "address": "Via Duca degli Abruzzi, 12/C, 07100 Sassari SS"
+                },
+                {
+                    "poiId": "67a495c464261e02f985e489",
+                    "order": 1,
+                    "name": "Piazza d'Italia",
+                    "description": "Piazza d'Italia è la piazza più importante della città di Sassari. Sorge ai bordi del centro storico medievale, appena all'esterno della cinta muraria, lungo l'antico asse stradale, già esistente in epoca romana (II secolo), che collegava Turris Lybissonis (Porto Torres) a Karalis (Cagliari) e attualmente chiamata via Roma.",
+                    "shortDescription": "Piazza più importante della città di Sassari.",
+                    "address": "Piazza d'Italia, 07100 Sassari SS"
+                }
+            ],
+            "path": [
+                {
+                    "longitude": 8.568925759122896,
+                    "latitude": 40.7163852121577
+                },
+                {
+                    "longitude": 8.564316037183172,
+                    "latitude": 40.72523852651865
+                }
+            ],
+            "category": "archeology",
+            "availableServices": [
+                {
+                    "name": "Servizio disponibile 1"
+                },
+                {
+                    "name": "Servizio disponibile 2"
+                }
+            ]
+        }
+    ],
+    "pageNumber": 1,
+    "pageSize": 10,
+    "totalPages": 1,
+    "totalCount": 1,
+    "hasPreviousPage": false,
+    "hasNextPage": false
+}

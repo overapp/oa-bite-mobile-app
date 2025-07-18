@@ -1,5 +1,6 @@
 import 'package:bite/managers/bluetooth/bluetooth_manager.dart';
 import 'package:bite/models/local_notifications/local_notifications.dart';
+import 'package:bite/models/screen/poi_detail/screen_type.dart';
 import 'package:bite/navigation/routes.dart';
 import 'package:bite/utils/logger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -96,16 +97,17 @@ class LocalNotificationService {
   ) async {
     final String? payload = notificationResponse.payload;
     if (payload != null && payload.isNotEmpty) {
-      BiteLogger().warning('notification payload: $payload');
+      BiteLogger().info('notification payload: $payload');
 
       final goRouter = GoRouter.of(rootNavigatorKey.currentContext!);
 
       BluetoothManager().dispose();
 
       final shouldReload = await goRouter.pushNamed(
-        Routes.poiDetailById,
+        Routes.poiDetailScreen,
         extra: {
-          'externalId': payload,
+          'beaconExternalId': payload,
+          'screenType': PoiDetailScreenType.fromNotification,
         },
       );
 

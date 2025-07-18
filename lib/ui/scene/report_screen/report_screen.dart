@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bite/extension/l10n_extension.dart';
+import 'package:bite/navigation/routes.dart';
 import 'package:bite/ui/components/actions/common_buttons/filled_button.dart';
 import 'package:bite/ui/components/communications/progress_indicator.dart';
 import 'package:bite/ui/components/containers/upload_photo_card.dart';
@@ -142,11 +145,25 @@ class _ReportScreenState extends State<ReportScreen> {
                       children: [
                         BiteTitleH1Text(text: context.l10n!.reportAProblem),
                         UploadPhotoCard(
+                          onRemoveTapped: () {
+                            cubit.removePicture();
+                          },
                           onButtonTapped: () {
                             cubit.pickImage(ImageSource.gallery);
                           },
-                          onIconTapped: () {},
-                          image: state is ReportSuccess ? state.image : null,
+                          onIconTapped: () async {
+                            final XFile? image =
+                                await context.push(Routes.cameraScreen);
+
+                            if (image != null) {
+                              cubit.selectedImage = image;
+                            }
+                          },
+                          image: state is ReportSuccess
+                              ? state.image
+                              : cubit.selectedImage != null
+                                  ? File(cubit.selectedImage!.path)
+                                  : null,
                         ),
                         BiteOutlinedTextField(
                           controller: controller,
@@ -171,12 +188,16 @@ class _ReportScreenState extends State<ReportScreen> {
                           controller: textAreaController,
                           hintText: context.l10n!.reportProblemHintText,
                           hintTextColor: BiteColors.textColor,
+                          onChanged: (value) {
+                            setState(() {});
+                          },
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 80),
                           child: BiteFilledButton(
                             onPressed: controller.text.isEmpty ||
-                                    cubit.selectedImage == null
+                                    cubit.selectedImage == null ||
+                                    textAreaController.text.isEmpty
                                 ? null
                                 : () {
                                     cubit.startUploadImage(

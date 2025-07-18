@@ -18,7 +18,7 @@ class ReportLoading extends ReportState {
   ReportLoading({required super.poiId});
 }
 
-class ReportImageSelected extends ReportState {
+class ReportImageSelected extends ReportState { 
   ReportImageSelected({required super.poiId});
 }
 
@@ -61,4 +61,9 @@ class ReportImageError extends ReportState {
   ReportImageError({
     required super.poiId,
   });
+}
+
+class ReportRemoveImage extends ReportState {
+  
+  ReportRemoveImage({required super.poiId});
 }

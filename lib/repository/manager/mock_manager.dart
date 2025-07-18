@@ -2,6 +2,8 @@ import 'package:bite/models/api_calls/api_calls.dart';
 import 'package:bite/models/get_device_info/get_device_info.dart';
 import 'package:bite/models/network_response/network_response.dart';
 import 'package:bite/models/request_type/request_type.dart';
+import 'package:bite/models/responses/location/location.dart';
+import 'package:bite/models/sensor_reading_model/sensor_reading.dart';
 import 'package:bite/repository/interface/manager_interface.dart';
 import 'package:bite/services/mock/mock_service.dart';
 
@@ -88,6 +90,25 @@ class MockManager implements Manager {
     NetworkResponse? getRoutebyId = await MockApi().request(
       apiCall: ApiCalls.getRoutebyId,
       requestType: RequestType.GET,
+    );
+
+    return getRoutebyId.maybeWhen(onSuccess: (response, status, message) {
+      return success(response);
+    }, loading: (message) {
+      return null;
+    }, onError: (status, message) {
+      return error(status, message);
+    }, orElse: () {
+      return null;
+    });
+  }
+
+  @override
+  Future getRoutesDestinations(Location userCurrentLocation, String routeId,
+      List<String> poiIds, Function success, Function error) async {
+    NetworkResponse? getRoutebyId = await MockApi().request(
+      apiCall: ApiCalls.getRoutesDestinations,
+      requestType: RequestType.POST,
     );
 
     return getRoutebyId.maybeWhen(onSuccess: (response, status, message) {
@@ -223,5 +244,24 @@ class MockManager implements Manager {
     // }, orElse: () {
     //   return null;
     // });
+  }
+
+  @override
+  Future getSensorReading(String poiId, MeasurementType type, Function success,
+      Function error) async {
+    NetworkResponse? sensorsReading = await MockApi().request(
+      apiCall: ApiCalls.sensorsReading,
+      requestType: RequestType.GET,
+    );
+
+    return sensorsReading.maybeWhen(onSuccess: (response, status, message) {
+      return success(response);
+    }, loading: (message) {
+      return null;
+    }, onError: (status, message) {
+      return error(status, message);
+    }, orElse: () {
+      return null;
+    });
   }
 }

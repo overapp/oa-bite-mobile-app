@@ -11,12 +11,14 @@ import 'package:flutter/material.dart';
 class UploadPhotoCard extends StatelessWidget {
   final Function onIconTapped;
   final Function onButtonTapped;
+  final Function onRemoveTapped;
   final File? image;
 
   const UploadPhotoCard({
     super.key,
     required this.onIconTapped,
     required this.onButtonTapped,
+    required this.onRemoveTapped,
     this.image,
   });
 
@@ -30,9 +32,31 @@ class UploadPhotoCard extends StatelessWidget {
       strokeWidth: 1.5,
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
       child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.16,
         width: double.infinity,
         child: image != null
-            ? Image.file(image!)
+            ? Column(
+                spacing: 8,
+                children: [
+                  Flexible(
+                    child: Image.file(image!),
+                  ),
+                  BiteFilledButton(
+                    topPadding: 4,
+                    bottomPadding: 4,
+                    leftPadding: 16,
+                    rightPadding: 16,
+                    width: null,
+                    borderRadius: 32,
+                    onPressed: () {
+                      onRemoveTapped();
+                    },
+                    text: context.l10n?.removeLabel ?? '',
+                    textFontWeight: FontWeight.w400,
+                    textFontSize: 16,
+                  )
+                ],
+              )
             : Column(
                 children: [
                   GestureDetector(
@@ -46,9 +70,14 @@ class UploadPhotoCard extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  BiteBodyB1Text(
-                    text: context.l10n!.takeAPhoto,
-                    textColor: BiteColors.neutral1,
+                  GestureDetector(
+                    onTap: () {
+                      onIconTapped();
+                    },
+                    child: BiteBodyB1Text(
+                      text: context.l10n!.takeAPhoto,
+                      textColor: BiteColors.neutral1,
+                    ),
                   ),
                   const SizedBox(
                     height: 4,

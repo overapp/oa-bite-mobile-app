@@ -1,5 +1,7 @@
 import 'package:bite/extension/l10n_extension.dart';
+import 'package:bite/models/responses/location/location.dart';
 import 'package:bite/models/responses/route/detail/route_detail.dart';
+import 'package:bite/models/screen/poi_detail/screen_type.dart';
 import 'package:bite/navigation/routes.dart';
 import 'package:bite/ui/components/actions/common_buttons/filled_button.dart';
 import 'package:bite/ui/components/app_bar/app_bar.dart';
@@ -11,6 +13,8 @@ import 'package:bite/ui/scene/route_detail/bloc/route_detail_state.dart';
 import 'package:bite/ui/themes/bite_colors.dart';
 import 'package:bite/ui/themes/bite_text.dart';
 import 'package:bite/utils/utils.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +29,34 @@ class RouteDetailScreen extends StatefulWidget {
 
 class _RouteDetailScreenState extends State<RouteDetailScreen> {
   RouteDetail? detail;
+
+  void visitPoi(BuildContext context, String poiId, Location poiLocation) {
+    showBiteDialog(
+        context, 'icon_waypoints', context.l10n?.vistPoiQuestion ?? '', '',
+        action1Message: context.l10n?.goToRouteLabel ?? '',
+        onAction1Tap: () async {
+          Navigator.of(context).pop();
+          // close the bottom sheet
+          Navigator.of(context).pop();
+
+          await context.read<RouteDetailCubit>().visitedPoi(
+                poiId,
+              );
+          launchMap(
+            poiLocation.latitude,
+            poiLocation.longitude,
+          );
+        },
+        action2Message: context.l10n?.dontVisit ?? '',
+        onAction2Tap: () async {
+          Navigator.of(context).pop();
+          // close the bottom sheet
+          Navigator.of(context).pop();
+          await context.read<RouteDetailCubit>().discardedPoi(
+                poiId,
+              );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +73,64 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
               const RouteDetail(
                 id: 'id',
                 name: 'name',
-                category: 'category',
+                category: RouteCategory.undefined,
                 availableServices: [],
               ),
         ),
         child: BlocListener<RouteDetailCubit, RouteDetailState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            context.read<RouteDetailCubit>();
+
+            if (state is RouteDetailShowBottomSheet) {
+              Location poiLocation =
+                  getTappedPoiCordinates(state.detail, state.tappedPoiId ?? '');
+
+              startRouteBottomSheet(
+                context: context,
+                onCardTap: (id) {
+                  visitPoi(context, id, poiLocation);
+                },
+                pois: state.detail.stops ?? [],
+                visitedPois: state.activeRoute?.pois,
+                suggestedPoi: state.suggestedPoi?.id ?? '',
+              );
+            }
+
+            if (state is RouteDetailExistingRoute) {
+              showBiteDialog(
+                  context,
+                  'icon_waypoints',
+                  context.l10n?.alreadyActiveRoute ?? '',
+                  context.l10n?.alreadyActiveRouteMessage ?? '',
+                  action1Message: context.l10n?.startNewRoute ?? '',
+                  onAction1Tap: () async {
+                    Navigator.of(context).pop();
+
+                    await context
+                        .read<RouteDetailCubit>()
+                        .deleteAndActivateNewRoute(
+                            state.detail.id, state.detail.name);
+                    // launchMap(
+                    //   state.suggestedPoi?.location?.latitude ?? 90,
+                    //   state.suggestedPoi?.location?.longitude ?? 90,
+                    // );
+                  },
+                  action2Message: context.l10n?.cancelLabel ?? '',
+                  onAction2Tap: () async {
+                    Navigator.of(context).pop();
+                  });
+            }
+
+            if (state is RouteDetailCompleted) {
+              showBiteDialog(context, 'icon_waypoints',
+                  context.l10n?.completeRoute ?? '', state.detail.name,
+                  action1Message: context.l10n?.okLabel ?? '',
+                  onAction1Tap: () {
+                context.pop();
+                context.pop();
+              });
+            }
+          },
           child: BlocBuilder<RouteDetailCubit, RouteDetailState>(
             builder: (context, state) {
               if (state is RouteDetailLoading) {
@@ -84,7 +168,7 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                   backgroundColor: BiteColors.bgColor,
                   title: detail?.name ?? '',
                   onIconTap: () {
-                    context.pop();
+                    context.pop(true);
                   },
                 ),
                 body: Padding(
@@ -113,6 +197,7 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                                   onMapCreated: (controller) {
                                     cubit.setMapController(controller);
                                   },
+                                  indoorViewEnabled: false,
                                   markers: markers,
                                   polylines: polylines,
                                   compassEnabled: false,
@@ -130,6 +215,9 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                                   myLocationEnabled: true,
                                   tiltGesturesEnabled: false,
                                   zoomControlsEnabled: false,
+                                  gestureRecognizers: {}..add(
+                                      Factory<PanGestureRecognizer>(
+                                          () => PanGestureRecognizer())),
                                 ),
                               ),
                             ),
@@ -204,7 +292,9 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                         // Services
                         BiteBodyB1Text(
                           text: (detail?.availableServices.isNotEmpty ?? false)
-                              ? detail!.availableServices.join(", ")
+                              ? detail!.availableServices
+                                  .map((service) => service.name)
+                                  .join(", ")
                               : '-',
                         ),
                         const SizedBox(
@@ -219,8 +309,9 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                           for (var poi in detail!.stops!)
                             GestureDetector(
                               onTap: () {
-                                context.push(Routes.poiDetail, extra: {
+                                context.push(Routes.poiDetailScreen, extra: {
                                   'poiId': poi.poiId,
+                                  'screenType': PoiDetailScreenType.fromMap
                                 });
                               },
                               child: Row(
@@ -231,7 +322,7 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                                     width: 4,
                                   ),
                                   BiteBodyB1Text(
-                                    text: poi.poiId,
+                                    text: poi.poiId ?? '',
                                     underlined: true,
                                   )
                                 ],
@@ -259,13 +350,13 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                         BiteFilledButton(
                           bottomPadding: 8,
                           topPadding: 8,
-                          onPressed: () {
-                            // Launch maps with first POI coordinates
-                            launchMap(
-                              detail?.path?.first.latitude ?? 90,
-                              detail?.path?.first.longitude ?? 90,
-                            );
-                          },
+                          onPressed: cubit.currentPosition != null
+                              ? () async {
+                                  // Save in shared preferences id of route
+                                  cubit.activateRoute(
+                                      detail?.id ?? '', detail?.name ?? '');
+                                }
+                              : null,
                           text: context.l10n!.startRoute,
                         ),
                       ],

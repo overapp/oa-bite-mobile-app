@@ -6,12 +6,15 @@ import 'package:bite/models/get_device_info/get_device_info.dart';
 import 'package:bite/models/network_response/network_response.dart';
 import 'package:bite/models/request_type/request_type.dart';
 import 'package:bite/models/responses/device_info/device_info.dart';
+import 'package:bite/models/responses/location/location.dart';
 import 'package:bite/models/responses/poi/detail/poi_detail.dart';
 import 'package:bite/models/responses/poi/poi_affluence/poi_affluence.dart';
 import 'package:bite/models/responses/pois_by_beacon_coordinates/pois_by_beacon_coordinates.dart';
 import 'package:bite/models/responses/request_upload_link/request_upload_link.dart';
 import 'package:bite/models/responses/route/detail/route_detail.dart';
 import 'package:bite/models/responses/route/get_routes/get_routes.dart';
+import 'package:bite/models/responses/sensors/sensor_reading/sensors_reading.dart';
+import 'package:bite/models/sensor_reading_model/sensor_reading.dart';
 import 'package:bite/repository/interface/manager_interface.dart';
 import 'package:bite/services/network/network_service.dart';
 
@@ -58,9 +61,9 @@ class NetworkManager implements Manager {
     final queryParameters = {
       'latitude': latitude,
       'longitude': longitude,
-      'fullText': searchTerm,
+      if (searchTerm != null) 'fullText': searchTerm,
       'page': page,
-      'pageSize': pageSize,
+      if (pageSize != null) 'pageSize': pageSize,
     };
     NetworkResponse? pois = await Api().request(
       url: '/public/pois',
@@ -78,7 +81,7 @@ class NetworkManager implements Manager {
           return error(status, message);
         },
         orElse: () {
-          return error('Unknow error', 'uìUnknow error');
+          return error('Unknow error', 'Unknow error');
         });
   }
 
@@ -119,7 +122,7 @@ class NetworkManager implements Manager {
     Function error,
   ) async {
     final queryParameters = {
-      'FullText': searchTerm,
+      if (searchTerm != null) 'FullText': searchTerm,
       if (sortBy != null) 'SortBy': sortBy,
       'Direction': direction, // 1 or -1
       'Page': page,
@@ -172,12 +175,49 @@ class NetworkManager implements Manager {
         });
   }
 
+  /// {POST} API call return suggestion fr next poi to visit
+  /// EndPoint: /public/routes/{routeId}/destinations
+  @override
+  Future getRoutesDestinations(Location userCurrentLocation, String routeId,
+      List<String> poiIds, Function success, Function error) async {
+    final body = {
+      'poiIds': poiIds,
+      'currentLocation': {
+        'latitude': userCurrentLocation.latitude,
+        'longitude':  userCurrentLocation.longitude,
+      },
+    };
+
+    NetworkResponse? pois = await Api().request(
+      url: '/public/routes/$routeId/destinations',
+      requestType: RequestType.POST,
+      body: body,
+    );
+
+    return pois.maybeWhen(
+        onSuccess: (response, status, message) {
+          if (response != null && response.isNotEmpty) {
+            final result = PoiDetail.fromJson(response);
+            return success(result);
+          } else {
+            return error(status, message);
+          }
+        },
+        loading: (message) {},
+        onError: (status, message) {
+          return error(status, message);
+        },
+        orElse: () {
+          return error('Unknow error', 'Unknow error');
+        });
+  }
+
   /// {GET} API call for retrieving POI affluence.
   /// EndPoint: /api/pois/{poiId}/traffic/statistics
   @override
   Future getPoiAffluence(String poiId, Function success, Function error) async {
     NetworkResponse? pois = await Api().request(
-      url: '/api/pois/$poiId/traffic/statistics',
+      url: '/public/pois/$poiId/traffic/statistics',
       requestType: RequestType.GET,
     );
 
@@ -301,6 +341,40 @@ class NetworkManager implements Manager {
     return response.maybeWhen(
         onSuccess: (response, status, message) {
           return success(status);
+        },
+        loading: (message) {},
+        onError: (status, message) {
+          return error(status, message);
+        },
+        orElse: () {
+          return error('Unknow error', 'Unknow error');
+        });
+  }
+
+  /// {GET} API call for retrieving sensors data when scan bluetooth isn't available.
+  /// EndPoint: /api/pois/{poiId}/sensor-readings/{type}/latest
+  @override
+  Future getSensorReading(String poiId, MeasurementType type, Function success,
+      Function error) async {
+    var measurementType = switch (type) {
+      MeasurementType.humidity => 'HUMIDITY',
+      MeasurementType.temperature => 'TEMPERATURE',
+    };
+
+    NetworkResponse? response = await Api().request(
+      url: '/api/pois/$poiId/sensor-readings/$measurementType/latest',
+      requestType: RequestType.GET,
+    );
+
+    return response.maybeWhen(
+        onSuccess: (response, status, message) {
+          if (response != null && response.isNotEmpty) {
+            final result = SensorsReading.fromJson(response);
+
+            return success(result);
+          } else {
+            return error(status, message);
+          }
         },
         loading: (message) {},
         onError: (status, message) {
